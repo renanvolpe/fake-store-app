@@ -1,7 +1,4 @@
-import 'package:fake_store_joao/data/models/user.dart';
-import 'package:fake_store_joao/data/models/user_create.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
-import 'package:fake_store_joao/data/repositories/users_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:result_dart/result_dart.dart';
 
@@ -10,10 +7,9 @@ void main() {
     AuthenticationRepository apiAuth = AuthenticationRepository();
     late String tokenUser;
     test("login user", () async {
-    
       var response = await apiAuth.loginUser("email@email.com", "1234");
 
-       response.onSuccess((success) => tokenUser = success);
+      response.onSuccess((success) => tokenUser = success);
 
       expect(response, isA<Success>());
     });
