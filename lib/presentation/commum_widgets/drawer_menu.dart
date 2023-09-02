@@ -8,12 +8,13 @@ class DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      shape: Border.all(width: 0),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Color(0xFF03A9F4),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

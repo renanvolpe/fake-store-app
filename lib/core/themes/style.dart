@@ -16,4 +16,9 @@ class Style {
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle priceProductTextStyle = textStyle.copyWith(
+    color: ColorsApp.kBackgroundColor,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
 }

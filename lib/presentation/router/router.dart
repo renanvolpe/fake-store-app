@@ -6,6 +6,7 @@ import 'package:fake_store_joao/presentation/screen/products_page.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
+  debugLogDiagnostics: true,
   initialLocation: "/",
   routes: [
     GoRoute(
@@ -25,8 +26,9 @@ final router = GoRouter(
               builder: (context, state) => const ProductsPage(),
               routes: [
                 GoRoute(
-                  path: 'id',
-                  builder: (context, state) => const ProductDetailPage(),
+                  path: ':productsId',
+                  builder: (context, state) => ProductDetailPage(
+                      idProd: int.parse(state.pathParameters['productsId']!)),
                 ),
               ]),
         ]),
