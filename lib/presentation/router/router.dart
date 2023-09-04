@@ -3,6 +3,7 @@ import 'package:fake_store_joao/presentation/screen/home_page.dart';
 import 'package:fake_store_joao/presentation/screen/login_page.dart';
 import 'package:fake_store_joao/presentation/screen/product_detail_page.dart';
 import 'package:fake_store_joao/presentation/screen/products_page.dart';
+import 'package:fake_store_joao/presentation/screen/register_page.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -32,5 +33,13 @@ final router = GoRouter(
                 ),
               ]),
         ]),
+    GoRoute(
+      path: '/account',
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const RegisterPage(),
+    ),
   ],
 );

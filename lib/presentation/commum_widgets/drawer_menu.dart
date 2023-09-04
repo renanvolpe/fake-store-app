@@ -2,6 +2,7 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 
+//this is component of "left menu"
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
 

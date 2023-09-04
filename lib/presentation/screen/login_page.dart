@@ -116,7 +116,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                               child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              context.push("/register");
+                            },
                             child: Ink(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 5),
