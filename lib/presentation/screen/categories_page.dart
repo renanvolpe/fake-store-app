@@ -52,7 +52,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     children: [
                       Expanded(
                         child: InkWell(
-                          onTap: () => context.push("/categories/products"),
+                          onTap: () =>
+                              context.push("/home/categories/products"),
                           child: Ink(
                             child: Card(
                               shape: Border.all(width: 0),

@@ -1,12 +1,15 @@
+import 'package:fake_store_joao/core/themes/colors_app.dart';
+import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/drawer_menu.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 
 //this component is to wrap a standard scafold that has a drawer
 class ScaffoldWithDrawe extends StatelessWidget {
-  const ScaffoldWithDrawe({super.key, required this.body, this.appBar});
+  const ScaffoldWithDrawe({super.key, required this.body, required this.title});
 
   final Widget body;
-  final AppBar? appBar;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,26 @@ class ScaffoldWithDrawe extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       key: scaffoldKey,
-      appBar: appBar,
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        leading: IconButton(
+          onPressed: () => scaffoldKey.currentState?.openDrawer(),
+          icon: const Icon(Icons.menu),
+          color: ColorsApp.kWhiteColor,
+        ),
+        centerTitle: true,
+        title: Text(
+          "$title",
+          style: Style.defaultLightTextStyle.copyWith(fontSize: 30),
+        ),
+        actions: [
+          Icon(
+            Icons.shopping_cart,
+            color: ColorsApp.kWhiteColor,
+          ),
+          15.sizeW
+        ],
+      ),
       drawer: const DrawerMenu(),
       body: body,
     );

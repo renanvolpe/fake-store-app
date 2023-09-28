@@ -1,7 +1,7 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/drawer_menu.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
@@ -15,34 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //key to use to open drawer
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.lightBlue,
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        leading: IconButton(
-          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          icon: const Icon(Icons.menu),
-          color: ColorsApp.kWhiteColor,
-        ),
-        centerTitle: true,
-        title: Text(
-          "SalgReis Store",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 30),
-        ),
-        actions: [
-          Icon(
-            Icons.shopping_cart,
-            color: ColorsApp.kWhiteColor,
-          ),
-          15.sizeW
-        ],
-      ),
-      drawer: const DrawerMenu(),
+    return ScaffoldWithDrawe(
+      title: "Home",
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -52,7 +29,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () => context.push("/categories"),
+                    onTap: () => context.push("/home/categories"),
                     child: Ink(
                       color: ColorsApp.kWhiteColor,
                       child: Center(

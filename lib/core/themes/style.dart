@@ -21,4 +21,9 @@ class Style {
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle hintTextStyle = textStyle.copyWith(
+    color: Colors.grey,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
 }

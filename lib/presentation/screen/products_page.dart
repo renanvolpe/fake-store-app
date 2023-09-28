@@ -51,7 +51,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       Expanded(
                         child: InkWell(
                           onTap: () =>
-                              context.push("/categories/products/${3}"),
+                              context.push("/home/categories/products/${3}"),
                           child: Ink(
                             decoration: BoxDecoration(
                                 color: Colors.white,

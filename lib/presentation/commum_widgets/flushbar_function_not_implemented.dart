@@ -6,6 +6,7 @@ void flushbarNotImplementedYet(context) {
   Flushbar(
     title: 'Botão não desenvolvido',
     backgroundColor: Colors.green,
+    flushbarPosition: FlushbarPosition.BOTTOM,
     message:
         'Essa funcionalidade não estpa pronta ainda :( \nAguarde as próximas versões ',
     duration: const Duration(seconds: 3),

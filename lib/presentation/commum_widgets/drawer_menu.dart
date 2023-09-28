@@ -1,10 +1,17 @@
 import 'package:fake_store_joao/core/themes/style.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 //this is component of "left menu"
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
+
+  bool checkCurrentRoute(context, String newPath) {
+    if (newPath == GoRouterState.of(context).uri.toString()) return true;
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +40,11 @@ class DrawerMenu extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Início'),
-            onTap: () {
-              //TODO return to home page if its not home page
-            },
-          ),
+              leading: const Icon(Icons.home),
+              title: const Text('Início'),
+              onTap: () {
+                if (checkCurrentRoute(context, "/home")) context.go("/home");
+              }),
           ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Meus produtos'),
@@ -47,17 +53,18 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Meus Pedidos'),
-            onTap: () {
-              //TODO call flushbar to future implementation
-            },
-          ),
+              leading: const Icon(Icons.list),
+              title: const Text('Meus Pedidos'),
+              onTap: () => flushbarNotImplementedYet(context)),
           ListTile(
-            leading: const Icon(Icons.account_circle_sharp),
-            title: const Text('Meu Perfil'),
+              leading: const Icon(Icons.account_circle_sharp),
+              title: const Text('Meu Perfil'),
+              onTap: () => context.go("/account")),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Sair'),
             onTap: () {
-              //TODO go to my account page
+              context.go("/");
             },
           ),
         ],
