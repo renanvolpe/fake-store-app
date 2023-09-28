@@ -8,7 +8,11 @@ set -x
 
 cd ..
 git clone -b test-ios-deploy https://github.com/renanvolpe/fakeStoreJoao.git 
+
 export PATH=C:/flutter/bin:$PATH
+
+set PATH=C:\flutter\bin;%PATH%
+
 
 flutter channel stable
 flutter doctor
