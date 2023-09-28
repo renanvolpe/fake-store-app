@@ -9,7 +9,7 @@ set -e
 set -x
 
 cd ..
-git clone -b stable https://github.com/renanvolpe/fakeStoreJoao.git
+git clone -b refs/heads/develop https://github.com/renanvolpe/fakeStoreJoao.git
 export PATH=`pwd`/flutter/bin:$PATH
 
 flutter channel stable
