@@ -9,11 +9,11 @@ set -x
 cd ..
 git clone -b test-ios-deploy https://github.com/renanvolpe/fakeStoreJoao.git   
 
-export PATH=C:/flutter/bin$PATH
+export PATH="C:\Users\renan\OneDrive\TrabalhosFlutter\flutter\bin"$PATH
 
 
-C:/flutter/bin/flutter channel stable
-C:/flutter/bin/flutter doctor
+flutter channel stable
+flutter/bin/flutter doctor
 
 echo "Installed flutter to `pwd`/flutter"
 
