@@ -9,7 +9,7 @@ set -x
 cd ..
 git clone -b test-ios-deploy https://github.com/renanvolpe/fakeStoreJoao.git   
 
-export PATH="C:\Users\renan\OneDrive\TrabalhosFlutter\flutter\bin:"$PATH
+export PATH="C:\Users\renan\OneDrive\TrabalhosFlutter\flutter"$PATH
 
 
 flutter channel stable
