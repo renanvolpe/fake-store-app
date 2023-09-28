@@ -12,8 +12,8 @@ git clone -b test-ios-deploy https://github.com/renanvolpe/fakeStoreJoao.git
 export PATH="C:\Users\renan\OneDrive\TrabalhosFlutter\flutter\bin"$PATH
 
 
-flutter channel stable
-flutter/bin/flutter doctor
+#flutter channel stable
+flutter doctor
 
 echo "Installed flutter to `pwd`/flutter"
 
