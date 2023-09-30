@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 
 //this is component of "left menu"
 class DrawerMenu extends StatelessWidget {
-  const DrawerMenu({super.key});
+  const DrawerMenu({super.key, required this.scaffoldKey});
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   bool checkCurrentRoute(context, String newPath) {
     if (newPath == GoRouterState.of(context).uri.toString()) return true;
@@ -64,6 +65,7 @@ class DrawerMenu extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Sair'),
             onTap: () {
+              scaffoldKey.currentState?.closeDrawer();
               context.go("/");
             },
           ),

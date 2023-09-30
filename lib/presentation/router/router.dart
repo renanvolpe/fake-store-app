@@ -1,4 +1,3 @@
-import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:fake_store_joao/presentation/screen/categories_page.dart';
 import 'package:fake_store_joao/presentation/screen/home_page.dart';
 import 'package:fake_store_joao/presentation/screen/login_page.dart';
