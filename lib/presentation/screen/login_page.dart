@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
-import 'package:fake_store_joao/logic/bloc/bloc/get_user_bloc.dart';
+import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
@@ -53,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           },
         ),
         BlocListener<GetUserBloc, GetUserState>(
+          bloc: getUserController,
           listener: (context, state) async{
             if(state is GetUserSuccess){
               await Flushbar(

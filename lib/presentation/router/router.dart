@@ -34,12 +34,13 @@ final router = GoRouter(
               path: 'categories',
               builder: (context, state) => const CategoriesPage(),
               routes: [
+                
                 GoRoute(
-                    path: 'products',
-                    builder: (context, state) => const ProductsPage(),
+                    path: ':idCat',
+                    builder: (context, state) => ProductsPage( idCategory: int.parse(state.pathParameters["idCat"]!),),
                     routes: [
                       GoRoute(
-                        path: ':productsId',
+                        path: 'products/:productsId',
                         builder: (context, state) => ProductDetailPage(
                             idProd:
                                 int.parse(state.pathParameters['productsId']!)),

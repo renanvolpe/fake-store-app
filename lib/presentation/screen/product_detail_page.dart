@@ -1,9 +1,13 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
+import 'package:fake_store_joao/data/models/product.dart';
+import 'package:fake_store_joao/data/repositories/products_repository.dart';
+import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -14,6 +18,14 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  late GetProductBloc getProductController;
+  @override
+  void initState() {
+    getProductController = GetProductBloc(ProductRepository());
+    getProductController.add(GetProductStarted(widget.idProd));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,73 +46,94 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
       ),
       body: LayoutBuilder(
-        builder: (_, constraints) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: constraints.maxWidth,
-              height: constraints.maxHeight * 0.45,
-              color: ColorsApp.kBlackColor,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    10.sizeH,
-                    Text(
-                      "Nome do produto",
-                      style: Style.defaultTextStyle.copyWith(fontSize: 22),
+        builder: (_, constraints) =>
+            BlocBuilder<GetProductBloc, GetProductState>(
+          bloc: getProductController,
+          builder: (context, state) {
+            if (state is GetProductSuccess) {
+              Product product = state.product;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight * 0.45,
+                    child: Image.network(
+                      product.images.first,
+                      fit: BoxFit.fill,
                     ),
-                    15.sizeH,
-                    Text(
-                      "R\$ 60,00",
-                      style: Style.priceProductTextStyle.copyWith(fontSize: 20),
-                    ),
-                    15.sizeH,
-                    Text(
-                      "Descrição: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-                      style: Style.defaultTextStyle.copyWith(fontSize: 14),
-                    ),
-                    15.sizeH,
-                    Text("Características: Muito Conforto, DryFit, Esportiva",
-                        style: Style.defaultTextStyle.copyWith(fontSize: 14)),
-                    15.sizeH,
-                    Text(
-                      "Tamanho: ",
-                      style: Style.defaultTextStyle.copyWith(fontSize: 14),
-                    ),
-                    15.sizeH,
-                    const ChoseSize(),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: InkWell(
-                          onTap: () {
-                            flushbarNotImplementedYet(context);
-                          },
-                          child: Ink(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 12),
-                            color: Colors.lightBlue,
-                            child: Center(
-                                child: Text(
-                              "Comprar",
-                              style: Style.defaultLightTextStyle
-                                  .copyWith(fontSize: 22),
-                            )),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          10.sizeH,
+                          Text(
+                            product.title,
+                            style:
+                                Style.defaultTextStyle.copyWith(fontSize: 22),
                           ),
-                        ))
-                      ],
+                          15.sizeH,
+                          Text(
+                            "R\$ ${product.price}",
+                            style: Style.priceProductTextStyle
+                                .copyWith(fontSize: 20),
+                          ),
+                          15.sizeH,
+                          Text(
+                            "Descrição: ${product.description}",
+                            style:
+                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                          ),
+                          15.sizeH,
+                          Text(
+                              "Características: Muito Conforto, DryFit, Esportiva",
+                              style: Style.defaultTextStyle
+                                  .copyWith(fontSize: 14)),
+                          15.sizeH,
+                          Text(
+                            "Tamanho: ",
+                            style:
+                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                          ),
+                          15.sizeH,
+                          const ChoseSize(),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: InkWell(
+                                onTap: () {
+                                  flushbarNotImplementedYet(context);
+                                },
+                                child: Ink(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 12),
+                                  color: Colors.lightBlue,
+                                  child: Center(
+                                      child: Text(
+                                    "Comprar",
+                                    style: Style.defaultLightTextStyle
+                                        .copyWith(fontSize: 22),
+                                  )),
+                                ),
+                              ))
+                            ],
+                          ),
+                          10.sizeH,
+                        ],
+                      ),
                     ),
-                    10.sizeH,
-                  ],
-                ),
-              ),
-            )
-          ],
+                  )
+                ],
+              );
+            }
+            return const Center(
+                child: SizedBox(
+                    width: 15, height: 15, child: CircularProgressIndicator()));
+          },
         ),
       ),
     );
