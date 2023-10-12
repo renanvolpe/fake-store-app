@@ -140,7 +140,7 @@ class CateogriesRepository implements CategoriesRequest {
   }
 
   @override
-  updateCategory(Category category) async {
+  Future<Result<String, String>> updateCategory(Category category) async {
     String? errorMessage;
 
     Uri uri = Uri.https(Endpoints.baseUrl,

@@ -147,7 +147,7 @@ class ProductRepository implements ProductsRequest {
   }
 
   @override
-  updateProduct(Product product) async {
+  Future<Result<String, String>> updateProduct(Product product) async {
     String? errorMessage;
 
     Uri uri = Uri.https(Endpoints.baseUrl,

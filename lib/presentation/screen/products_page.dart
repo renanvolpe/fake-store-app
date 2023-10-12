@@ -9,8 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductsPage extends StatefulWidget {
-  const ProductsPage({super.key, required this.idCategory});
+  const ProductsPage(
+      {super.key, required this.idCategory, this.isEdit = false});
   final int idCategory;
+  final bool isEdit;
   @override
   State<ProductsPage> createState() => _ProductsPageState();
 }
@@ -70,8 +72,18 @@ class _ProductsPageState extends State<ProductsPage> {
                               children: [
                                 Expanded(
                                   child: InkWell(
-                                    onTap: () => context.push(
-                                        "/home/categories/${widget.idCategory}/products/${listProducts[i].id}"),
+                                    onTap: () async {
+                                      if (widget.isEdit) {
+                                        await context.push(
+                                            "/home/categoriesEdit/${widget.idCategory}/productsEdit/${listProducts[i].id}");
+                                        getAllProductsController.add(
+                                            GetAllProductsStarted(
+                                                widget.idCategory));
+                                      } else {
+                                        context.push(
+                                            "/home/categories/${widget.idCategory}/products/${listProducts[i].id}");
+                                      }
+                                    },
                                     child: Ink(
                                       decoration: BoxDecoration(
                                           color: Colors.white,

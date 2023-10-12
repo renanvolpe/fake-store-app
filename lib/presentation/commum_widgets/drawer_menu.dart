@@ -1,7 +1,9 @@
 import 'package:fake_store_joao/core/themes/style.dart';
+import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 //this is component of "left menu"
@@ -16,6 +18,7 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var profileInstance = GetIt.I.get<Profile>();
     return Drawer(
       shape: Border.all(width: 0),
       child: ListView(
@@ -34,7 +37,7 @@ class DrawerMenu extends StatelessWidget {
                 ),
                 15.sizeH,
                 Text(
-                  'Olá, João Salgueiro',
+                  'Olá, ${profileInstance.user.name}',
                   style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                 ),
               ],
@@ -44,19 +47,20 @@ class DrawerMenu extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Início'),
               onTap: () {
-                if (checkCurrentRoute(context, "/home")) context.go("/home");
+                context.go("/home");
               }),
-          ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Meus produtos'),
-            onTap: () {
-              //TODO the admin part to call the products of store
-            },
-          ),
-          ListTile(
-              leading: const Icon(Icons.list),
-              title: const Text('Meus Pedidos'),
-              onTap: () => flushbarNotImplementedYet(context)),
+          profileInstance.user.role.contains("admin")
+              ? ListTile(
+                  leading: const Icon(Icons.list),
+                  title: const Text('Meus produtos'),
+                  onTap: () {
+                    context.push("/home/categoriesEdit");
+                  },
+                )
+              : ListTile(
+                  leading: const Icon(Icons.list),
+                  title: const Text('Meus Pedidos'),
+                  onTap: () => flushbarNotImplementedYet(context)),
           ListTile(
               leading: const Icon(Icons.account_circle_sharp),
               title: const Text('Meu Perfil'),
@@ -64,8 +68,9 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Sair'),
-            onTap: () {
+            onTap: () async{
               scaffoldKey.currentState?.closeDrawer();
+              await GetIt.I.unregister<Profile>();
               context.go("/");
             },
           ),
