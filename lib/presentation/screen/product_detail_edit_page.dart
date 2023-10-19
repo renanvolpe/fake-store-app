@@ -2,27 +2,36 @@ import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/repositories/products_repository.dart';
+import 'package:fake_store_joao/logic/bloc/edit_product/edit_poduct_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({super.key, required this.idProd});
+class ProductDetailEditPage extends StatefulWidget {
+  const ProductDetailEditPage({super.key, required this.idProd});
   final int idProd;
   @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
+  State<ProductDetailEditPage> createState() => _ProductDetailEditPageState();
 }
 
-class _ProductDetailPageState extends State<ProductDetailPage> {
+class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
   late GetProductBloc getProductController;
+  late EditPoductBloc editProductController;
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   @override
   void initState() {
     getProductController = GetProductBloc(ProductRepository());
     getProductController.add(GetProductStarted(widget.idProd));
+
+    editProductController = EditPoductBloc(ProductRepository());
     super.initState();
   }
 
@@ -41,17 +50,26 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         backgroundColor: ColorsApp.kBackgroundColor,
         centerTitle: true,
         title: Text(
-          "Nome do produto",
+          "Edite o produto",
           style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
         ),
       ),
       body: LayoutBuilder(
         builder: (_, constraints) =>
-            BlocBuilder<GetProductBloc, GetProductState>(
+            BlocConsumer<GetProductBloc, GetProductState>(
+          listener: (context, state) {
+            if (state is GetProductSuccess) {
+              Product product = state.product;
+              titleController.text = product.title;
+              priceController.text = product.price.toString();
+              descriptionController.text = product.description;
+            }
+          },
           bloc: getProductController,
           builder: (context, state) {
             if (state is GetProductSuccess) {
               Product product = state.product;
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,36 +88,58 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           10.sizeH,
-                          Text(
-                            product.title,
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 22),
+                          TextFormField(
+                            controller: titleController,
                           ),
                           15.sizeH,
-                          Text(
-                            "R\$ ${product.price}",
-                            style: Style.priceProductTextStyle
-                                .copyWith(fontSize: 20),
+                          TextFormField(
+                            controller: priceController,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                           ),
                           15.sizeH,
-                          Text(
-                            "Descrição: ${product.description}",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                          TextFormField(
+                            controller: descriptionController,
                           ),
                           15.sizeH,
-                          Text(
-                              "Características: Muito Conforto, DryFit, Esportiva",
-                              style: Style.defaultTextStyle
-                                  .copyWith(fontSize: 14)),
-                          15.sizeH,
-                          Text(
-                            "Tamanho: ",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: BlocConsumer<EditPoductBloc,
+                                    EditPoductState>(
+                                  bloc: editProductController,
+                                  listener: (context, state) {
+                                    if (state is EditPoductSuccess) {
+                                      getProductController.add(
+                                          GetProductStarted(widget.idProd));
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    if (state is EditPoductProgress) {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    return InkWell(
+                                        onTap: () {
+                                          var newProd = product;
+                                          newProd.title = titleController.text;
+                                          newProd.description =
+                                              descriptionController.text;
+                                          newProd.price =
+                                              int.parse(priceController.text);
+                                          editProductController
+                                              .add(EditProductStarted(product));
+                                        },
+                                        child: const Icon(Icons.edit));
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                          15.sizeH,
-                          const ChoseSize(),
                           const Spacer(),
                           Row(
                             children: [

@@ -37,7 +37,7 @@ class ScaffoldWithDrawe extends StatelessWidget {
           15.sizeW
         ],
       ),
-      drawer: const DrawerMenu(),
+      drawer:  DrawerMenu(scaffoldKey: scaffoldKey,),
       body: body,
     );
   }

@@ -3,6 +3,7 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/category.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
+import 'package:fake_store_joao/logic/bloc/edit_category/edit_category_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +11,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({super.key});
+class CategoriesEditPage extends StatefulWidget {
+  const CategoriesEditPage({super.key});
 
   @override
-  State<CategoriesPage> createState() => _CategoriesPageState();
+  State<CategoriesEditPage> createState() => _CategoriesEditPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class _CategoriesEditPageState extends State<CategoriesEditPage> {
   late Profile profileInstance;
   late GetAllCategoriesBloc categoriesController;
+  late EditCategoryBloc editCategoryController;
+  List<TextEditingController> listForms = [];
   @override
   void initState() {
     profileInstance = GetIt.I.get<Profile>();
     categoriesController = GetAllCategoriesBloc(CateogriesRepository());
     categoriesController.add(GetAllCategoriesStarted());
+    editCategoryController = EditCategoryBloc(CateogriesRepository());
     super.initState();
   }
 
@@ -42,7 +46,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           ),
         ),
         title: Text(
-          "Selecione a categoria",
+          "Edite a categoria",
           style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
         ),
         actions: [
@@ -59,6 +63,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
         builder: (context, state) {
           if (state is GetAllCategoriesSuccess) {
             List<Category> listCategory = state.category;
+            for (int i = 0; i < listCategory.length; i++) {
+              listForms.add(TextEditingController(text: listCategory[i].name));
+            }
             return SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -74,7 +81,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             Expanded(
                               child: InkWell(
                                 onTap: () => context.push(
-                                    "/home/categories/${listCategory[index].id}"),
+                                    "/home/categoriesEdit/${listCategory[index].id}"),
                                 child: Ink(
                                   child: Card(
                                     shape: Border.all(width: 0),
@@ -104,10 +111,50 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                listCategory[index].name,
-                                                style: Style.defaultTextStyle
-                                                    .copyWith(fontSize: 22),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: TextFormField(
+                                                      controller:
+                                                          listForms[index],
+                                                    ),
+                                                  ),
+                                                  15.sizeW,
+                                                  BlocConsumer<EditCategoryBloc,
+                                                      EditCategoryState>(
+                                                    bloc:
+                                                        editCategoryController,
+                                                    listener: (context, state) {
+                                                      if (state
+                                                          is EditCategorySuccess) {
+                                                        categoriesController.add(
+                                                            GetAllCategoriesStarted());
+                                                      }
+                                                    },
+                                                    builder: (context, state) {
+                                                      if (state
+                                                          is EditCategoryProgress) {
+                                                        return const Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        );
+                                                      }
+                                                      return InkWell(
+                                                          onTap: () {
+                                                            listCategory[index]
+                                                                    .name =
+                                                                listForms[index]
+                                                                    .text;
+                                                            editCategoryController.add(
+                                                                EditCategoryStarted(
+                                                                    listCategory[
+                                                                        index]));
+                                                          },
+                                                          child: const Icon(
+                                                              Icons.edit));
+                                                    },
+                                                  )
+                                                ],
                                               ),
                                               15.sizeH,
                                               Row(

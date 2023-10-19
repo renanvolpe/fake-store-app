@@ -33,8 +33,6 @@ void main() {
       expect(response, isA<Success>());
     });
 
-    //TODO CALL PRODUCTS TESTS
-
     test("Delete category", () async {
       var response = await apiCategorires.updateCategory(categoryTeste);
       expect(response, isA<Success>());

@@ -1,7 +1,9 @@
 import 'package:fake_store_joao/core/themes/style.dart';
+import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class MyAccountPage extends StatelessWidget {
@@ -9,6 +11,7 @@ class MyAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var profileInstance = GetIt.I.get<Profile>();
     return ScaffoldWithDrawe(
       title: "Minha conta",
       body: Column(
@@ -21,13 +24,14 @@ class MyAccountPage extends StatelessWidget {
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             title: Text(
-              "Name person",
+              profileInstance.user.name,
               style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
             ),
-            subtitle: Text("E-mail title",
+            subtitle: Text(profileInstance.user.email,
                 style: Style.defaultLightTextStyle.copyWith(fontSize: 16)),
-            trailing: const CircleAvatar(
+            trailing: CircleAvatar(
               radius: 35,
+              child: Image.network(profileInstance.user.avatar),
             ),
           ),
           const Divider(
@@ -35,7 +39,10 @@ class MyAccountPage extends StatelessWidget {
           ),
           20.sizeH,
           InkWell(
-            onTap: () => context.go("/"),
+            onTap: () async {
+              await GetIt.I.unregister<Profile>();
+              context.go("/");
+            },
             child: Ink(
                 padding:
                     const EdgeInsets.symmetric(vertical: 9, horizontal: 15),

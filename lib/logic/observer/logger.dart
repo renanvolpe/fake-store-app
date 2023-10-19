@@ -5,7 +5,7 @@ class Logg {
     var loggerError = Logger(
       printer: PrettyPrinter(methodCount: 2, stackTraceBeginIndex: 1),
     );
-    loggerError.e("Driver_framework : $errorMessage");
+    loggerError.e("Error catch : $errorMessage");
   }
   static void information(String message) {
     var loggerInformation = Logger(
