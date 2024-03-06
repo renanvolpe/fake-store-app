@@ -1,9 +1,8 @@
-import 'package:fake_store_joao/logic/observer/logger.dart';
+import 'package:fake_store_joao/core/observer/logger.dart';
 import 'package:http/http.dart';
 
-class NetWorkUtils{
-  static Map<String, String> getHttpHeaders([String? token]
-  ) {
+class NetWorkUtils {
+  static Map<String, String> getHttpHeaders([String? token]) {
     Map<String, String> headers = {
       "Content-Type": "application/json; charset=UTF-8",
       "Accept": "*/*",
@@ -14,26 +13,22 @@ class NetWorkUtils{
 
     return headers;
   }
+
   static Map<String, String> postHttpHeaders([String? token]) {
     Map<String, String> headers = {
-      "Accept": "application/json",
       "Accept-Encoding": "gzip, deflate, br",
       "Connection": "keep-alive",
-      'Content-Type': 'application/json; charset=UTF-8',
-       "Authorization": "Bearer $token"
+      "Authorization": "Bearer $token"
     };
 
     return headers;
   }
 
-  static   printLoggSuccess(Response response) => Logg.consoleShow(
-      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}");
- static   printLoggError(Response response, String errorMessage) => Logg.error(
-      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}  \nErrorMessage :: $errorMessage");
-
+  static printLoggSuccess(Response response) => Logg.consoleShow(
+      "VERB :: ${response.request?.method} \nENDPOINT :: ${response.request?.url} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}");
+  static printLoggError(Response response, String errorMessage) => Logg.error(
+      "VERB :: ${response.request?.method} \nENDPOINT :: ${response.request?.url} \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}  \nErrorMessage :: $errorMessage");
 }
-
-
 
 class ResponseCode {
   String getValue(int num) {

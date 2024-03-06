@@ -6,14 +6,14 @@ import 'package:http/http.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract class HttpService {
-  Future httpGet({required String endpoint, Map<String, String>? params});
+  httpGet({required String endpoint, Map<String, String>? params});
   httpPost({required String endpoint, required Map body});
+  httpDelete({required String endpoint, required int id});
   httpPut({required String endpoint, required Map body, String? token});
-  httpDelete({required String endpoint, required Map body});
   httpPatch({required String endpoint, required Map body, String? token});
 }
 
-class HttpClient implements HttpService {
+class HttpClients implements HttpService {
   static String authority = Endpoints.baseUrl;
   static String v1 = Endpoints.v1;
 
@@ -29,6 +29,7 @@ class HttpClient implements HttpService {
     var mapDecoded = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
+      NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
       errorMessage = "Status code: ${response.statusCode} :: Error: ${mapDecoded["message"]}";
@@ -45,9 +46,9 @@ class HttpClient implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await post(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
+    Response response = await post(uri, headers: NetWorkUtils.postHttpHeaders(token), body: body);
     var mapDecoded = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
@@ -58,15 +59,15 @@ class HttpClient implements HttpService {
   }
 
   @override
-  Future<Result<dynamic, String>> httpDelete({required String endpoint, required Map body}) async {
+  Future<Result<dynamic, String>> httpDelete({required String endpoint, required int id}) async {
     dynamic errorMessage;
     String token = "";
 
-    Uri uri = Uri.https(authority, v1 + endpoint);
+    Uri uri = Uri.https(authority, "$v1$endpoint$id");
 
-    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
+    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token));
     var mapDecoded = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
@@ -83,9 +84,9 @@ class HttpClient implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
+    Response response = await patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
     var mapDecoded = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
@@ -102,9 +103,9 @@ class HttpClient implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
+    Response response = await put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: body);
     var mapDecoded = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {

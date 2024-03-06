@@ -4,7 +4,7 @@ import 'package:fake_store_joao/core/constants/endpoints.dart';
 import 'package:fake_store_joao/data/http/http_utils.dart';
 import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/models/product_create.dart';
-import 'package:fake_store_joao/logic/observer/logger.dart';
+import 'package:fake_store_joao/core/observer/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:result_dart/result_dart.dart';
 
