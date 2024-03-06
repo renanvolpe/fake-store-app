@@ -12,8 +12,7 @@ import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-final GlobalKey<NavigatorState> _shellNavigatorKey =
-    GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   debugLogDiagnostics: true,
@@ -22,54 +21,42 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const LoginPage(),
+      builder: (context, state) => LoginPage(),
     ),
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
-    GoRoute(
-        path: '/home',
-        builder: (context, state) => const HomePage(),
-        routes: [
-          GoRoute(
-              path: 'categories',
-              builder: (context, state) => const CategoriesPage(),
-              routes: [
-                GoRoute(
-                    path: ':idCat',
-                    builder: (context, state) => ProductsPage(
-                          idCategory: int.parse(state.pathParameters["idCat"]!),
-                        ),
-                    routes: [
-                      GoRoute(
-                        path: 'products/:productsId',
-                        builder: (context, state) => ProductDetailPage(
-                            idProd:
-                                int.parse(state.pathParameters['productsId']!)),
-                      ),
-                    ]),
-              ]),
-          GoRoute(
-              path: 'categoriesEdit',
-              builder: (context, state) => const CategoriesEditPage(),
-              routes: [
-                GoRoute(
-                    path: ':idCat',
-                    builder: (context, state) => ProductsPage(
-                          idCategory: int.parse(state.pathParameters["idCat"]!),
-                          isEdit: true,
-                        ),
-                    routes: [
-                      GoRoute(
-                        path: 'productsEdit/:productsId',
-                        builder: (context, state) => ProductDetailEditPage(
-                            idProd:
-                                int.parse(state.pathParameters['productsId']!)),
-                      ),
-                    ]),
-              ]),
-        ]),
+    GoRoute(path: '/home', builder: (context, state) => const HomePage(), routes: [
+      GoRoute(path: 'categories', builder: (context, state) => const CategoriesPage(), routes: [
+        GoRoute(
+            path: ':idCat',
+            builder: (context, state) => ProductsPage(
+                  idCategory: int.parse(state.pathParameters["idCat"]!),
+                ),
+            routes: [
+              GoRoute(
+                path: 'products/:productsId',
+                builder: (context, state) => ProductDetailPage(idProd: int.parse(state.pathParameters['productsId']!)),
+              ),
+            ]),
+      ]),
+      GoRoute(path: 'categoriesEdit', builder: (context, state) => const CategoriesEditPage(), routes: [
+        GoRoute(
+            path: ':idCat',
+            builder: (context, state) => ProductsPage(
+                  idCategory: int.parse(state.pathParameters["idCat"]!),
+                  isEdit: true,
+                ),
+            routes: [
+              GoRoute(
+                path: 'productsEdit/:productsId',
+                builder: (context, state) =>
+                    ProductDetailEditPage(idProd: int.parse(state.pathParameters['productsId']!)),
+              ),
+            ]),
+      ]),
+    ]),
     GoRoute(
       path: '/account',
       builder: (context, state) => const MyAccountPage(),
