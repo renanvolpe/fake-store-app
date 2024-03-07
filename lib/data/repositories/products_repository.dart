@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:fake_store_joao/core/constants/endpoints.dart';
-import 'package:fake_store_joao/data/http/http_utils.dart';
+import 'package:fake_store_joao/data/http/http_connection.dart';
 import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/models/product_create.dart';
-import 'package:fake_store_joao/core/observer/logger.dart';
-import 'package:http/http.dart' as http;
 import 'package:result_dart/result_dart.dart';
 
 abstract class ProductsRequest {
@@ -17,142 +13,63 @@ abstract class ProductsRequest {
 }
 
 class ProductRepository implements ProductsRequest {
+  HttpClients connect = HttpClients();
+
   @override
   Future<Result<Product, String>> createProduct(ProductCreate product) async {
-    String? errorMessage;
-
-    Uri uri =
-        Uri.https(Endpoints.baseUrl, "${Endpoints.v1}${Endpoints.products}");
-    Map body = {
+    Map<String, dynamic> body = {
       "title": product.title,
-      "images": product.images ,
+      "images": product.images,
       "price": product.price.toString(),
       "description": product.description,
       "categoryId": product.categodyId.toString()
     };
 
-    try {
-      http.Response response = await http.post(uri,
-          headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body) );
-      var mapDecoded = jsonDecode(response.body);
+    var response = await connect.httpPost(endpoint: Endpoints.products, body: body);
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        Product product = Product.fromMap(mapDecoded);
-        return Success(product);
-      } else {
-        errorMessage =
-            "Status code: ${response.statusCode} :: Error: ${mapDecoded["message"]}";
-
-        throw Exception();
-      }
-    } catch (e) {
-      Logg.error(errorMessage ?? e.toString());
-    }
-
-    return Failure(errorMessage ?? "Error inesperado");
+    return response.fold((success) {
+      var prod = Product.fromMap(success);
+      return Success(prod);
+    }, (failure) => Failure(failure));
   }
 
   @override
   Future<Result<String, String>> deleteProduct(int id) async {
-    String? errorMessage;
+    var response = await connect.httpDelete(endpoint: Endpoints.products, id: id);
 
-    Uri uri = Uri.https(
-        Endpoints.baseUrl, "${Endpoints.v1}${Endpoints.products}$id");
-
-    try {
-      http.Response response =
-          await http.delete(uri, headers: NetWorkUtils.getHttpHeaders());
-      var mapDecoded = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        return const Success("Deleção de categoria com sucesso");
-      } else {
-        errorMessage =
-            "Status code: ${response.statusCode}error: ${mapDecoded["message"]}";
-
-        throw Exception();
-      }
-    } catch (e) {
-      Logg.error("$errorMessage ?? Erro não esperado");
-    }
-
-    return Failure(errorMessage ?? "Error inesperado");
+    return response.fold((success) {
+      return const Success("sucess");
+    }, (failure) => Failure(failure));
   }
 
   @override
   Future<Result<List<Product>, String>> getAllProducts(int categoryId) async {
-    String? errorMessage;
-
     final params = {
       'categoryId': categoryId.toString(),
     };
-    Uri uri = Uri.https(
-        Endpoints.baseUrl, "${Endpoints.v1}${Endpoints.products}", params);
 
-    try {
-      http.Response response =
-          await http.get(uri, headers: NetWorkUtils.getHttpHeaders());
-      var mapDecoded = jsonDecode(response.body);
+    var response = await connect.httpGet(endpoint: Endpoints.products, params: params);
 
-      if (response.statusCode == 200) {
-        List<Product> listProduct = [];
-
-        for (var element in mapDecoded) {
-          listProduct.add(Product.fromMap(element));
-        }
-        if (listProduct.isEmpty) {
-          errorMessage = "lista de categorias está vazia";
-          throw Exception();
-        }
-
-        return Success(listProduct);
+    return response.fold((success) {
+      List<Product> listProds = [];
+      for (var element in success) {
+        listProds.add(Product.fromMap(element));
       }
-      errorMessage =
-          "Status code: ${response.statusCode}error: ${mapDecoded["message"]}";
-
-      throw Exception();
-    } catch (e) {
-      Logg.error(errorMessage ?? "Erro não esperado");
-    }
-
-    return Failure(errorMessage ?? "Error inesperado");
+      return Success(listProds);
+    }, (failure) => Failure(failure));
   }
 
   @override
   Future<Result<Product, String>> getOneProduct(int idProduct) async {
-    String? errorMessage;
+    var response = await connect.httpGet(endpoint: "${Endpoints.products}$idProduct");
 
-    Uri uri = Uri.https(
-        Endpoints.baseUrl, "${Endpoints.v1}${Endpoints.products}$idProduct");
-
-    try {
-      http.Response response =
-          await http.get(uri, headers: NetWorkUtils.getHttpHeaders());
-      var mapDecoded = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        var product = Product.fromMap(mapDecoded);
-        return Success(product);
-      } else {
-        errorMessage =
-            "Status code: ${response.statusCode}error: ${mapDecoded["message"]}";
-
-        throw Exception();
-      }
-    } catch (e) {
-      Logg.error("$errorMessage ?? Erro não esperado");
-    }
-
-    return Failure(errorMessage ?? "Error inesperado");
+    return response.fold((success) {
+      return Success(Product.fromMap(success));
+    }, (failure) => Failure(failure));
   }
 
   @override
   Future<Result<String, String>> updateProduct(Product product) async {
-    String? errorMessage;
-
-    Uri uri = Uri.https(Endpoints.baseUrl,
-        "${Endpoints.v1}${Endpoints.products}${product.id}");
-
     Map<String, dynamic> body = {
       "title": product.title,
       "images": product.images,
@@ -160,23 +77,10 @@ class ProductRepository implements ProductsRequest {
       "description": product.description,
     };
 
-    try {
-      http.Response response = await http.put(uri,
-          headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
-      var mapDecoded = jsonDecode(response.body);
+    var response = await connect.httpPut(endpoint: "${Endpoints.products}${product.id}", body: body);
 
-      if (response.statusCode == 200) {
-        return const Success("Categoria atualizada com sucesso");
-      } else {
-        errorMessage =
-            "Status code: ${response.statusCode} :: Error: ${mapDecoded["message"]}";
-
-        throw Exception();
-      }
-    } catch (e) {
-      Logg.error(errorMessage ?? e.toString());
-    }
-
-    return Failure(errorMessage ?? "Error inesperado");
+    return response.fold((success) {
+      return const Success("success");
+    }, (failure) => Failure(failure));
   }
 }

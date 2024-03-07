@@ -7,7 +7,7 @@ import 'package:result_dart/result_dart.dart';
 
 abstract class HttpService {
   httpGet({required String endpoint, Map<String, String>? params});
-  httpPost({required String endpoint, required Map body});
+  httpPost({required String endpoint, required Map<String, dynamic> body});
   httpDelete({required String endpoint, required int id});
   httpPut({required String endpoint, required Map body, String? token});
   httpPatch({required String endpoint, required Map body, String? token});
@@ -18,12 +18,11 @@ class HttpClients implements HttpService {
   static String v1 = Endpoints.v1;
 
   @override
-  Future<Result<dynamic, String>> httpGet({required String endpoint, Map<String, String>? params}) async {
+  Future<Result<dynamic, String>> httpGet(
+      {required String endpoint, Map<String, String>? params, String? token}) async {
     String? errorMessage;
 
-    String token = "";
-
-    Uri uri = Uri.https(authority, v1 + endpoint);
+    Uri uri = Uri.https(authority, v1 + endpoint, params);
 
     Response response = await get(uri, headers: NetWorkUtils.getHttpHeaders(token));
     var mapDecoded = jsonDecode(response.body);
@@ -40,20 +39,19 @@ class HttpClients implements HttpService {
   }
 
   @override
-  Future<Result<dynamic, String>> httpPost({required String endpoint, required Map body}) async {
+  Future<Result<dynamic, String>> httpPost({required String endpoint, required Map<String, dynamic> body}) async {
     dynamic errorMessage;
-    String token = "";
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await post(uri, headers: NetWorkUtils.postHttpHeaders(token), body: body);
+    Response response = await post(uri, headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
-      NetWorkUtils.printLoggError(response, errorMessage);
       errorMessage = "Status code: ${response.statusCode} :: Error: ${mapDecoded["message"]}";
+      NetWorkUtils.printLoggError(response, errorMessage);
       return Failure(errorMessage);
     }
   }
@@ -80,11 +78,10 @@ class HttpClients implements HttpService {
   @override
   Future<Result<dynamic, String>> httpPatch({required String endpoint, required Map body, String? token}) async {
     dynamic errorMessage;
-    String token = "";
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: body);
+    Response response = await patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -99,18 +96,17 @@ class HttpClients implements HttpService {
   @override
   Future<Result<dynamic, String>> httpPut({required String endpoint, required Map body, String? token}) async {
     dynamic errorMessage;
-    String token = "";
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: body);
+    Response response = await put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
       return Success(mapDecoded);
     } else {
-      NetWorkUtils.printLoggError(response, errorMessage);
       errorMessage = "Status code: ${response.statusCode} :: Error: ${mapDecoded["message"]}";
+      NetWorkUtils.printLoggError(response, errorMessage);
       return Failure(errorMessage);
     }
   }

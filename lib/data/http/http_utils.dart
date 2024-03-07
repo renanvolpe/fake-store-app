@@ -18,16 +18,18 @@ class NetWorkUtils {
     Map<String, String> headers = {
       "Accept-Encoding": "gzip, deflate, br",
       "Connection": "keep-alive",
-      "Authorization": "Bearer $token"
+      "Authorization": "Bearer $token",
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
     };
 
     return headers;
   }
 
   static printLoggSuccess(Response response) => Logg.consoleShow(
-      "VERB :: ${response.request?.method} \nENDPOINT :: ${response.request?.url} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}");
+      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}");
   static printLoggError(Response response, String errorMessage) => Logg.error(
-      "VERB :: ${response.request?.method} \nENDPOINT :: ${response.request?.url} \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}  \nErrorMessage :: $errorMessage");
+      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}  \nErrorMessage :: $errorMessage");
 }
 
 class ResponseCode {
