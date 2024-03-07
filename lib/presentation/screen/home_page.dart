@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         bloc: getAllProductsController,
         builder: (context, state) {
           if (state is GetAllProductsSuccess) {
-            var listProducts = state.listProducts;
+            // var listProducts = state.listProducts;
             return SingleChildScrollView(
               child: Column(
                 children: [
