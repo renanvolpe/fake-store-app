@@ -8,7 +8,6 @@ import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dar
 import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,12 +53,10 @@ class _HomePageState extends State<HomePage> {
                             color: ColorsApp.kWhiteColor,
                             child: Center(
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 25),
+                                padding: const EdgeInsets.symmetric(vertical: 25),
                                 child: Text(
                                   "Seleciona por categorias aqui",
-                                  style: Style.defaultTextStyle
-                                      .copyWith(fontSize: 24),
+                                  style: Style.defaultTextStyle.copyWith(fontSize: 24),
                                 ),
                               ),
                             ),
@@ -74,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     style: Style.defaultLightTextStyle.copyWith(fontSize: 24),
                   ),
                   15.sizeH,
-                  StaggeredGrid.count(
+                  /*StaggeredGrid.count(
                     crossAxisCount: 4,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
@@ -216,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ],
-                  ),
+                  ),*/
                   25.sizeH
                 ],
               ),

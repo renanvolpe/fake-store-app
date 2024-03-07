@@ -34,7 +34,7 @@ void main() {
     });
 
     test("Delete category", () async {
-      var response = await apiCategorires.updateCategory(categoryTeste);
+      var response = await apiCategorires.deleteCategory(categoryTeste.id);
       expect(response, isA<Success>());
     });
   });

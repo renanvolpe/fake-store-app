@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+   LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Colors.red,
                 flushbarPosition: FlushbarPosition.BOTTOM,
                 message: 'Revise as infomações de login',
-                duration: const Duration(seconds: 2),
+                duration:  Duration(seconds: 2),
               ).show(context);
             }
           },
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Colors.green,
                 flushbarPosition: FlushbarPosition.BOTTOM,
                 message: 'Aprecia as funcionalidades do app',
-                duration: const Duration(milliseconds: 1500),
+                duration:  Duration(milliseconds: 1500),
               ).show(context);
               // ignore: use_build_context_synchronously
               context.push("/home");
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Colors.red,
                 flushbarPosition: FlushbarPosition.BOTTOM,
                 message: 'Revise as infomações de login',
-                duration: const Duration(seconds: 2),
+                duration:  Duration(seconds: 2),
               ).show(context);
             }
             
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5)),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                       EdgeInsets.symmetric(horizontal: 20, vertical: 50),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: emailController,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             focusColor: Colors.white,
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey)),
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: passwordController,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             focusColor: Colors.white,
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey)),
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                     passwordController.text)),
                                 child: Ink(
                                     padding:
-                                        const EdgeInsets.symmetric(vertical: 7),
+                                         EdgeInsets.symmetric(vertical: 7),
                                     color: Colors.lightBlue,
                                     child: Center(
                                         child: BlocBuilder<GetUserBloc,
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                                             if (state is LoginProgress ||
                                                 stateGetUser
                                                     is GetUserProgress) {
-                                              return const Center(
+                                              return  Center(
                                                   child: SizedBox(
                                                       height: 22,
                                                       width: 22,
@@ -215,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Ink(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                       EdgeInsets.symmetric(vertical: 5),
                                   color: Colors.white,
                                   child: Center(
                                       child: Text(

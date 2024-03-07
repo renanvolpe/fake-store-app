@@ -10,11 +10,11 @@ void main() {
     late User userTest;
     test("create a user", () async {
       var userCrate = UserCreate(
-          name: "Renan teste",
-          email: "email@email.com",
+          name: "João Salg",
+          email: "joao@joao.com",
           password: "1234",
           avatar: "https://api.lorem.space/image/face?w=640&h=480",
-          role: "costumer");
+          role: "admin");
 
       var response = await apiUser.createUser(userCrate);
 
