@@ -5,6 +5,7 @@ import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_category/edit_category_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,15 +81,13 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () => context.push(
-                                    "/home/categoriesEdit/${listCategory[index].id}"),
+                                onTap: () => context.push("/home/categoriesEdit/${listCategory[index].id}"),
                                 child: Ink(
                                   child: Card(
                                     shape: Border.all(width: 0),
                                     color: Colors.white,
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
@@ -96,8 +95,8 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
                                               child: Container(
                                                 color: Colors.black,
                                                 height: 200,
-                                                child: Image.network(
-                                                  listCategory[index].image,
+                                                child: ImageDefault(
+                                                  url: listCategory[index].image,
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
@@ -105,53 +104,38 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 10),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          listForms[index],
+                                                      controller: listForms[index],
                                                     ),
                                                   ),
                                                   15.sizeW,
-                                                  BlocConsumer<EditCategoryBloc,
-                                                      EditCategoryState>(
-                                                    bloc:
-                                                        editCategoryController,
+                                                  BlocConsumer<EditCategoryBloc, EditCategoryState>(
+                                                    bloc: editCategoryController,
                                                     listener: (context, state) {
-                                                      if (state
-                                                          is EditCategorySuccess) {
-                                                        categoriesController.add(
-                                                            GetAllCategoriesStarted());
+                                                      if (state is EditCategorySuccess) {
+                                                        categoriesController.add(GetAllCategoriesStarted());
                                                       }
                                                     },
                                                     builder: (context, state) {
-                                                      if (state
-                                                          is EditCategoryProgress) {
+                                                      if (state is EditCategoryProgress) {
                                                         return const Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
+                                                          child: CircularProgressIndicator(),
                                                         );
                                                       }
                                                       return InkWell(
                                                           onTap: () {
-                                                            listCategory[index]
-                                                                    .name =
-                                                                listForms[index]
-                                                                    .text;
-                                                            editCategoryController.add(
-                                                                EditCategoryStarted(
-                                                                    listCategory[
-                                                                        index]));
+                                                            listCategory[index].name = listForms[index].text;
+                                                            editCategoryController
+                                                                .add(EditCategoryStarted(listCategory[index]));
                                                           },
-                                                          child: const Icon(
-                                                              Icons.edit));
+                                                          child: const Icon(Icons.edit));
                                                     },
                                                   )
                                                 ],
@@ -163,19 +147,12 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
                                                     child: SizedBox(
                                                       height: 80,
                                                       child: Center(
-                                                        child:
-                                                            ListView.separated(
+                                                        child: ListView.separated(
                                                           shrinkWrap: true,
-                                                          scrollDirection:
-                                                              Axis.horizontal,
+                                                          scrollDirection: Axis.horizontal,
                                                           itemCount: 4,
-                                                          separatorBuilder:
-                                                              (context,
-                                                                      index) =>
-                                                                  15.sizeW,
-                                                          itemBuilder: (context,
-                                                                  index) =>
-                                                              Container(
+                                                          separatorBuilder: (context, index) => 15.sizeW,
+                                                          itemBuilder: (context, index) => Container(
                                                             width: 70,
                                                             color: Colors.amber,
                                                           ),

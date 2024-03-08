@@ -5,6 +5,7 @@ import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,8 +47,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
       ),
       body: LayoutBuilder(
-        builder: (_, constraints) =>
-            BlocBuilder<GetProductBloc, GetProductState>(
+        builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(
           bloc: getProductController,
           builder: (context, state) {
             if (state is GetProductSuccess) {
@@ -58,8 +58,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   SizedBox(
                     width: constraints.maxWidth,
                     height: constraints.maxHeight * 0.45,
-                    child: Image.network(
-                      product.images.first,
+                    child: ImageDefault(
+                      url: product.images.first,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -72,31 +72,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           10.sizeH,
                           Text(
                             product.title,
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 22),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 22),
                           ),
                           15.sizeH,
                           Text(
                             "R\$ ${product.price}",
-                            style: Style.priceProductTextStyle
-                                .copyWith(fontSize: 20),
+                            style: Style.priceProductTextStyle.copyWith(fontSize: 20),
                           ),
                           15.sizeH,
                           Text(
                             "Descrição: ${product.description}",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
-                          Text(
-                              "Características: Muito Conforto, DryFit, Esportiva",
-                              style: Style.defaultTextStyle
-                                  .copyWith(fontSize: 14)),
+                          Text("Características: Muito Conforto, DryFit, Esportiva",
+                              style: Style.defaultTextStyle.copyWith(fontSize: 14)),
                           15.sizeH,
                           Text(
                             "Tamanho: ",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
                           const ChoseSize(),
@@ -109,14 +103,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   flushbarNotImplementedYet(context);
                                 },
                                 child: Ink(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                                   color: Colors.lightBlue,
                                   child: Center(
                                       child: Text(
                                     "Comprar",
-                                    style: Style.defaultLightTextStyle
-                                        .copyWith(fontSize: 22),
+                                    style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                                   )),
                                 ),
                               ))
@@ -130,9 +122,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               );
             }
-            return const Center(
-                child: SizedBox(
-                    width: 15, height: 15, child: CircularProgressIndicator()));
+            return const Center(child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator()));
           },
         ),
       ),

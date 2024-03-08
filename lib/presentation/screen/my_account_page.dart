@@ -1,5 +1,6 @@
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +22,15 @@ class MyAccountPage extends StatelessWidget {
             color: Colors.white,
           ),
           ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+            contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             title: Text(
               profileInstance.user.name,
               style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
             ),
-            subtitle: Text(profileInstance.user.email,
-                style: Style.defaultLightTextStyle.copyWith(fontSize: 16)),
+            subtitle: Text(profileInstance.user.email, style: Style.defaultLightTextStyle.copyWith(fontSize: 16)),
             trailing: CircleAvatar(
               radius: 35,
-              child: Image.network(profileInstance.user.avatar),
+              child: ImageDefault(url: profileInstance.user.avatar),
             ),
           ),
           const Divider(
@@ -44,8 +43,7 @@ class MyAccountPage extends StatelessWidget {
               context.go("/");
             },
             child: Ink(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 9, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 15),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -54,9 +52,7 @@ class MyAccountPage extends StatelessWidget {
                       color: Colors.white,
                     ),
                     8.sizeW,
-                    Text("Logout",
-                        style:
-                            Style.defaultLightTextStyle.copyWith(fontSize: 22)),
+                    Text("Logout", style: Style.defaultLightTextStyle.copyWith(fontSize: 22)),
                   ],
                 )),
           )

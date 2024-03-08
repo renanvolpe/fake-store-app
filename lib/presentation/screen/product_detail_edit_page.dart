@@ -5,6 +5,7 @@ import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_product/edit_poduct_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,8 +55,7 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
         ),
       ),
       body: LayoutBuilder(
-        builder: (_, constraints) =>
-            BlocConsumer<GetProductBloc, GetProductState>(
+        builder: (_, constraints) => BlocConsumer<GetProductBloc, GetProductState>(
           listener: (context, state) {
             if (state is GetProductSuccess) {
               Product product = state.product;
@@ -75,8 +75,8 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                   SizedBox(
                     width: constraints.maxWidth,
                     height: constraints.maxHeight * 0.45,
-                    child: Image.network(
-                      product.images.first,
+                    child: ImageDefault(
+                      url: product.images.first,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -107,13 +107,11 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
-                                child: BlocConsumer<EditPoductBloc,
-                                    EditPoductState>(
+                                child: BlocConsumer<EditPoductBloc, EditPoductState>(
                                   bloc: editProductController,
                                   listener: (context, state) {
                                     if (state is EditPoductSuccess) {
-                                      getProductController.add(
-                                          GetProductStarted(widget.idProd));
+                                      getProductController.add(GetProductStarted(widget.idProd));
                                     }
                                   },
                                   builder: (context, state) {
@@ -126,12 +124,9 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                                         onTap: () {
                                           var newProd = product;
                                           newProd.title = titleController.text;
-                                          newProd.description =
-                                              descriptionController.text;
-                                          newProd.price =
-                                              int.parse(priceController.text);
-                                          editProductController
-                                              .add(EditProductStarted(product));
+                                          newProd.description = descriptionController.text;
+                                          newProd.price = int.parse(priceController.text);
+                                          editProductController.add(EditProductStarted(product));
                                         },
                                         child: const Icon(Icons.edit));
                                   },
@@ -148,14 +143,12 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                                   flushbarNotImplementedYet(context);
                                 },
                                 child: Ink(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                                   color: Colors.lightBlue,
                                   child: Center(
                                       child: Text(
                                     "Comprar",
-                                    style: Style.defaultLightTextStyle
-                                        .copyWith(fontSize: 22),
+                                    style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                                   )),
                                 ),
                               ))
@@ -169,9 +162,7 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                 ],
               );
             }
-            return const Center(
-                child: SizedBox(
-                    width: 15, height: 15, child: CircularProgressIndicator()));
+            return const Center(child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator()));
           },
         ),
       ),

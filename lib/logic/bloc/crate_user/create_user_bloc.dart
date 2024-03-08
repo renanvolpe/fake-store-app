@@ -11,8 +11,13 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
     on<CreateUserStarted>((event, emit) async {
       emit(CreateUserProgress());
       var response = await userRepository.createUser(event.userCreate);
-      response.fold((success) => emit(CreateUserSuccess()),
-          (failure) => emit(CreateUserFailure(failure)));
+      response.fold((success) => emit(CreateUserSuccess()), (failure) => emit(CreateUserFailure(failure)));
     });
+
+    //  on<CreateUserStarted>((event, emit) async {
+    //   emit(CreateUserProgress());
+    //   var result = await userUseCase.call(event.userCreate);
+    //   result.fold((success) => emit(CreateUserSuccess()), (failure) => emit(CreateUserFailure(failure)));
+    // });
   }
 }

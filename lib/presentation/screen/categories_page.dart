@@ -4,6 +4,7 @@ import 'package:fake_store_joao/data/models/category.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,15 +74,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () => context.push(
-                                    "/home/categories/${listCategory[index].id}"),
+                                onTap: () => context.push("/home/categories/${listCategory[index].id}"),
                                 child: Ink(
                                   child: Card(
                                     shape: Border.all(width: 0),
                                     color: Colors.white,
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
@@ -89,8 +88,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                               child: Container(
                                                 color: Colors.black,
                                                 height: 200,
-                                                child: Image.network(
-                                                  listCategory[index].image,
+                                                child: ImageDefault(
+                                                  url: listCategory[index].image,
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
@@ -98,16 +97,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 10),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 listCategory[index].name,
-                                                style: Style.defaultTextStyle
-                                                    .copyWith(fontSize: 22),
+                                                style: Style.defaultTextStyle.copyWith(fontSize: 22),
                                               ),
                                               15.sizeH,
                                               Row(
@@ -116,19 +112,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                                     child: SizedBox(
                                                       height: 80,
                                                       child: Center(
-                                                        child:
-                                                            ListView.separated(
+                                                        child: ListView.separated(
                                                           shrinkWrap: true,
-                                                          scrollDirection:
-                                                              Axis.horizontal,
+                                                          scrollDirection: Axis.horizontal,
                                                           itemCount: 4,
-                                                          separatorBuilder:
-                                                              (context,
-                                                                      index) =>
-                                                                  15.sizeW,
-                                                          itemBuilder: (context,
-                                                                  index) =>
-                                                              Container(
+                                                          separatorBuilder: (context, index) => 15.sizeW,
+                                                          itemBuilder: (context, index) => Container(
                                                             width: 70,
                                                             color: Colors.amber,
                                                           ),

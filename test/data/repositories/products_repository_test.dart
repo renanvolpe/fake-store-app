@@ -26,6 +26,11 @@ void main() {
       expect(response, isA<Success>());
     });
 
+      test("Get All products but with no category", () async {
+      var response = await apiProducts.getAllProducts();
+      expect(response, isA<Success>());
+    });
+
     test("Get a product", () async {
       var response = await apiProducts.getOneProduct(productTest.id);
       expect(response, isA<Success>());

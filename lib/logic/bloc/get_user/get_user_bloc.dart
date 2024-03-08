@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:fake_store_joao/data/models/user.dart';
+import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
@@ -12,8 +12,8 @@ class GetUserBloc extends Bloc<GetUserEvent, GetUserState> {
     on<GetUserStarted>((event, emit) async {
       var response = await authenticationRepository.getProfile(event.token);
       response.fold((success) {
-        //REGISTER SINGLETON PROFILE
-        GetIt.instance.registerSingleton<User>(success);
+        //USE CASE HERE
+        GetIt.instance.registerSingleton<Profile>(Profile(token: event.token, user: success));
         emit(GetUserSuccess());
       }, (failure) => GetUserFailure());
     });

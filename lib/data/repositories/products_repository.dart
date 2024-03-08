@@ -43,10 +43,16 @@ class ProductRepository implements ProductsRequest {
   }
 
   @override
-  Future<Result<List<Product>, String>> getAllProducts(int categoryId) async {
-    final params = {
-      'categoryId': categoryId.toString(),
-    };
+  Future<Result<List<Product>, String>> getAllProducts([int? categoryId]) async {
+    late Map<String, String> params;
+    //if dont have params, send it "{}"
+    if (categoryId != null) {
+      params = {
+        'categoryId': "$categoryId",
+      };
+    } else {
+      params = {};
+    }
 
     var response = await connect.httpGet(endpoint: Endpoints.products, params: params);
 
