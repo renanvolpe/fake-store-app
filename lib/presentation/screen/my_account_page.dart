@@ -1,6 +1,6 @@
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
 import 'package:flutter/material.dart';

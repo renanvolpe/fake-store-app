@@ -4,7 +4,7 @@ import 'package:fake_store_joao/data/models/category.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

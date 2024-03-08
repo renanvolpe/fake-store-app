@@ -1,6 +1,7 @@
+import 'package:fake_store_joao/core/default/image_default.dart';
+import 'package:fake_store_joao/core/default/loading_shimmer.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -36,7 +37,6 @@ class PromotionSection extends StatelessWidget {
               child: InkWell(
                 onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[0].id}"),
                 child: Container(
-                    color: Colors.amber,
                     margin: const EdgeInsets.all(1),
                     child: ImageDefault(url: listProducts[0].images.first, fit: BoxFit.fill)),
               ),
@@ -47,7 +47,6 @@ class PromotionSection extends StatelessWidget {
               child: InkWell(
                 onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[1].id}"),
                 child: Container(
-                    color: Colors.amber,
                     margin: const EdgeInsets.all(1),
                     child: ImageDefault(url: listProducts[1].images.first, fit: BoxFit.fill)),
               ),
@@ -58,7 +57,6 @@ class PromotionSection extends StatelessWidget {
               child: InkWell(
                 onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[2].id}"),
                 child: Container(
-                    color: Colors.amber,
                     margin: const EdgeInsets.all(1),
                     child: ImageDefault(url: listProducts[2].images.first, fit: BoxFit.fill)),
               ),
@@ -69,13 +67,31 @@ class PromotionSection extends StatelessWidget {
               child: InkWell(
                 onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[3].id}"),
                 child: Container(
-                    color: Colors.amber,
                     margin: const EdgeInsets.all(1),
                     child: ImageDefault(url: listProducts[3].images.first, fit: BoxFit.fill)),
               ),
             ),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class PromotionSectionShimmer extends StatelessWidget {
+  const PromotionSectionShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGrid.count(
+      crossAxisCount: 4,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      children: const [
+        StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 2, child: LoadingShimmerDefault()),
+        StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 1, child: LoadingShimmerDefault()),
+        StaggeredGridTile.count(crossAxisCellCount: 1, mainAxisCellCount: 1, child: LoadingShimmerDefault()),
+        StaggeredGridTile.count(crossAxisCellCount: 1, mainAxisCellCount: 1, child: LoadingShimmerDefault()),
       ],
     );
   }
