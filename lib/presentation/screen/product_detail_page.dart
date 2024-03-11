@@ -1,3 +1,6 @@
+import 'package:fake_store_joao/core/default/appbar_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
+import 'package:fake_store_joao/core/default/loading_shimmer.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
@@ -5,11 +8,9 @@ import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
-import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.idProd});
@@ -31,21 +32,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kWhiteColor,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: ColorsApp.kWhiteColor,
-          ),
-        ),
-        backgroundColor: ColorsApp.kBackgroundColor,
-        centerTitle: true,
-        title: Text(
-          "Nome do produto",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
-        ),
-      ),
+      appBar: AppbarDefault(context, "Nome do produto"),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(
           bloc: getProductController,
@@ -59,6 +46,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     width: constraints.maxWidth,
                     height: constraints.maxHeight * 0.45,
                     child: ImageDefault(
+                      radius: 0,
                       url: product.images.first,
                       fit: BoxFit.fill,
                     ),
@@ -122,9 +110,47 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               );
             }
-            return const Center(child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator()));
+            return const ProductPageShimmer();
           },
         ),
+      ),
+    );
+  }
+}
+
+class ProductPageShimmer extends StatelessWidget {
+  const ProductPageShimmer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
+          15.sizeH,
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const LoadingShimmerDefault(
+                  height: 20,
+                ),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 20, width: 100),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 50),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 80, width: 150),
+                100.sizeH,
+                const LoadingShimmerDefault(height: 50),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

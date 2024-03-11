@@ -1,3 +1,5 @@
+import 'package:fake_store_joao/core/default/appbar_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
@@ -5,12 +7,10 @@ import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_product/edit_poduct_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
-import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ProductDetailEditPage extends StatefulWidget {
   const ProductDetailEditPage({super.key, required this.idProd});
@@ -39,21 +39,7 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kWhiteColor,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: ColorsApp.kWhiteColor,
-          ),
-        ),
-        backgroundColor: ColorsApp.kBackgroundColor,
-        centerTitle: true,
-        title: Text(
-          "Edite o produto",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
-        ),
-      ),
+      appBar: AppbarDefault(context, "Edite um produto"),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocConsumer<GetProductBloc, GetProductState>(
           listener: (context, state) {

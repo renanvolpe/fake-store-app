@@ -1,11 +1,11 @@
+import 'package:fake_store_joao/core/default/appbar_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
-import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/category.dart';
 import 'package:fake_store_joao/data/models/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_category/edit_category_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
-import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,28 +37,7 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kBackgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Icons.arrow_back,
-            color: ColorsApp.kWhiteColor,
-          ),
-        ),
-        title: Text(
-          "Edite a categoria",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
-        ),
-        actions: [
-          Icon(
-            Icons.menu,
-            color: ColorsApp.kWhiteColor,
-          ),
-          15.sizeW
-        ],
-        backgroundColor: ColorsApp.kBackgroundColor,
-      ),
+      appBar: AppbarDefault(context, "Edite a categoria"),
       body: BlocBuilder<GetAllCategoriesBloc, GetAllCategoriesState>(
         bloc: categoriesController,
         builder: (context, state) {

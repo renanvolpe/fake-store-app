@@ -81,9 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           bottom: 0,
                           right: 0,
                           child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(50)),
+                              decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(50)),
                               padding: const EdgeInsets.all(5),
                               child: const Icon(
                                 Icons.edit,
@@ -108,9 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: emailController,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       hintText: "Escreva seu e-mail aqui",
@@ -131,9 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: nameController,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       hintText: "Escreva seu e-mail aqui",
@@ -154,9 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: passwordController,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       hintText: "Escreva seu e-mail aqui",
@@ -177,9 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: confirmPassController,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       hintText: "Escreva seu e-mail aqui",
@@ -220,19 +210,16 @@ class _RegisterPageState extends State<RegisterPage> {
                               name: nameController.text,
                               email: emailController.text,
                               password: passwordController.text,
-                              avatar:
-                                  "https://api.lorem.space/image/face?w=640&h=480",
+                              avatar: "https://api.lorem.space/image/face?w=640&h=480",
                               role: "Costumer");
-                          createUserController
-                              .add(CreateUserStarted(userCreate));
+                          createUserController.add(CreateUserStarted(userCreate));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
                               child: Ink(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                                padding: const EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlue,
