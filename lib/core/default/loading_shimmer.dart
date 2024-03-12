@@ -22,7 +22,7 @@ class LoadingShimmerDefault extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.grey.shade200,
             boxShadow: boxShadow,
             borderRadius: BorderRadius.circular(radius),
           ),

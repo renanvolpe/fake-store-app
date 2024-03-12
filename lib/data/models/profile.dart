@@ -11,6 +11,11 @@ class Profile {
     required this.user,
   });
 
+  setNewProfile(Profile newProf) {
+    token = newProf.token;
+    user = newProf.user;
+  }
+
   Profile copyWith({
     String? token,
     User? user,
@@ -31,14 +36,13 @@ class Profile {
   factory Profile.fromMap(Map<String, dynamic> map) {
     return Profile(
       token: map['token'] as String,
-      user: User.fromMap(map['user'] as Map<String,dynamic>),
+      user: User.fromMap(map['user'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Profile.fromJson(String source) =>
-      Profile.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Profile.fromJson(String source) => Profile.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Profile(token: $token, user: $user)';
@@ -46,10 +50,8 @@ class Profile {
   @override
   bool operator ==(covariant Profile other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.token == token &&
-      other.user == user;
+
+    return other.token == token && other.user == user;
   }
 
   @override

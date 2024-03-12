@@ -35,59 +35,35 @@ class RecentHighlightsSection extends StatelessWidget {
             StaggeredGridTile.count(
               crossAxisCellCount: 2,
               mainAxisCellCount: 2,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[5].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[5].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 5),
             ),
+            StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 1, child: buttonImage(context, 6)),
             StaggeredGridTile.count(
-              crossAxisCellCount: 2,
+              crossAxisCellCount: 1,
               mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[6].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[6].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 7),
             ),
             StaggeredGridTile.count(
               crossAxisCellCount: 1,
               mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[7].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[7].images.first, fit: BoxFit.fill)),
-              ),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 1,
-              mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[8].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[8].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 8),
             ),
             StaggeredGridTile.count(
               crossAxisCellCount: 4,
               mainAxisCellCount: 2,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[9].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(
-                      url: listProducts[9].images.first,
-                      fit: BoxFit.fill,
-                    )),
-              ),
+              child: buttonImage(context, 9),
             ),
           ],
         ),
       ],
+    );
+  }
+
+  InkWell buttonImage(BuildContext context, int i) {
+    return InkWell(
+      onTap: () => context.pushNamed("product_detail", queryParameters: {"idProd": listProducts[i].id.toString()}),
+      child: Container(
+          margin: const EdgeInsets.all(1), child: ImageDefault(url: listProducts[i].images.first, fit: BoxFit.fill)),
     );
   }
 }

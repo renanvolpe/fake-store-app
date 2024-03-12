@@ -12,9 +12,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductsPage extends StatefulWidget {
-  const ProductsPage({super.key, required this.idCategory, this.isEdit = false});
+  const ProductsPage({super.key, required this.idCategory, this.isEdit = false, this.nameCat});
   final int idCategory;
   final bool isEdit;
+  final String? nameCat;
   @override
   State<ProductsPage> createState() => _ProductsPageState();
 }
@@ -33,7 +34,7 @@ class _ProductsPageState extends State<ProductsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kBackgroundColor,
-      appBar: AppbarDefault(context, "Lista de produtos"),
+      appBar: AppbarDefault(context, widget.nameCat ?? "Lista de produtos"),
       body: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
         bloc: getAllProductsController,
         builder: (context, state) {
@@ -72,7 +73,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   await context.push("/home/categoriesEdit/${widget.idCategory}/productsEdit/${listProducts[i].id}");
                   getAllProductsController.add(GetAllProductsStarted(widget.idCategory));
                 } else {
-                  context.push("/home/categories/${widget.idCategory}/products/${listProducts[i].id}");
+                  context.pushNamed("product_detail", queryParameters: {"idProd": listProducts[i].id.toString()});
                 }
               },
               child: Ink(

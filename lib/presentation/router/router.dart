@@ -30,14 +30,17 @@ final router = GoRouter(
     GoRoute(path: '/home', builder: (context, state) => const HomePage(), routes: [
       GoRoute(path: 'categories', builder: (context, state) => const CategoriesPage(), routes: [
         GoRoute(
-            path: ':idCat',
+            name: "products",
+            path: 'products',
             builder: (context, state) => ProductsPage(
-                  idCategory: int.parse(state.pathParameters["idCat"]!),
+                  nameCat: state.uri.queryParameters["nameCat"],
+                  idCategory: int.parse(state.uri.queryParameters["idCat"]!),
                 ),
             routes: [
               GoRoute(
-                path: 'products/:productsId',
-                builder: (context, state) => ProductDetailPage(idProd: int.parse(state.pathParameters['productsId']!)),
+                name: "product_detail",
+                path: 'product_detail',
+                builder: (context, state) => ProductDetailPage(idProd: int.parse(state.uri.queryParameters["idProd"]!)),
               ),
             ]),
       ]),

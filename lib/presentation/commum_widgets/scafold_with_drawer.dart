@@ -30,14 +30,19 @@ class ScaffoldWithDrawe extends StatelessWidget {
           style: Style.defaultLightTextStyle.copyWith(fontSize: 30),
         ),
         actions: [
-          Icon(
-            Icons.shopping_cart,
-            color: ColorsApp.kWhiteColor,
+          InkWell(
+            // onTap: () => AddressesRepository(DB()).getAddress(),
+            child: Icon(
+              Icons.shopping_cart,
+              color: ColorsApp.kWhiteColor,
+            ),
           ),
           15.sizeW
         ],
       ),
-      drawer:  DrawerMenu(scaffoldKey: scaffoldKey,),
+      drawer: DrawerMenu(
+        scaffoldKey: scaffoldKey,
+      ),
       body: body,
     );
   }

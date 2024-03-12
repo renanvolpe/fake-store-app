@@ -13,7 +13,12 @@ class GetUserBloc extends Bloc<GetUserEvent, GetUserState> {
       var response = await authenticationRepository.getProfile(event.token);
       response.fold((success) {
         //USE CASE HERE
-        GetIt.instance.registerSingleton<Profile>(Profile(token: event.token, user: success));
+        if (GetIt.I.isRegistered<Profile>()) {
+          GetIt.I.get<Profile>().setNewProfile(Profile(token: event.token, user: success));
+        } else {
+          GetIt.instance.registerSingleton<Profile>(Profile(token: event.token, user: success));
+        }
+
         emit(GetUserSuccess());
       }, (failure) => GetUserFailure());
     });

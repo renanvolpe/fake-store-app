@@ -29,12 +29,16 @@ dependencies:
   get_it: ^7.6.4
   dartz: ^0.10.1
   shimmer: ^3.0.0
+  sqflite: ^2.3.2
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
   flutter_lints: ^2.0.0
-
+  sqflite_common_ffi: ^2.3.2+1
+  mockito: ^5.2.0 #mockito: ^5.4.4
 
 flutter:
 

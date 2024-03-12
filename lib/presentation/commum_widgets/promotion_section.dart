@@ -34,46 +34,34 @@ class PromotionSection extends StatelessWidget {
             StaggeredGridTile.count(
               crossAxisCellCount: 2,
               mainAxisCellCount: 2,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[0].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[0].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 0),
             ),
             StaggeredGridTile.count(
               crossAxisCellCount: 2,
               mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[1].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[1].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 1),
             ),
             StaggeredGridTile.count(
               crossAxisCellCount: 1,
               mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[2].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[2].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 2),
             ),
             StaggeredGridTile.count(
               crossAxisCellCount: 1,
               mainAxisCellCount: 1,
-              child: InkWell(
-                onTap: () => context.push("/home/categories/$categoryIndex/products/${listProducts[3].id}"),
-                child: Container(
-                    margin: const EdgeInsets.all(1),
-                    child: ImageDefault(url: listProducts[3].images.first, fit: BoxFit.fill)),
-              ),
+              child: buttonImage(context, 3),
             ),
           ],
         ),
       ],
+    );
+  }
+
+  InkWell buttonImage(BuildContext context, int i) {
+    return InkWell(
+      onTap: () => context.pushNamed("product_detail", queryParameters: {"idProd": listProducts[i].id.toString()}),
+      child: Container(
+          margin: const EdgeInsets.all(1), child: ImageDefault(url: listProducts[i].images.first, fit: BoxFit.fill)),
     );
   }
 }

@@ -31,8 +31,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: ColorsApp.kWhiteColor,
-      appBar: AppbarDefault(context, "Nome do produto"),
+      appBar: AppbarDefaultJustBackBtn(context),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(
           bloc: getProductController,
@@ -44,7 +45,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   SizedBox(
                     width: constraints.maxWidth,
-                    height: constraints.maxHeight * 0.45,
+                    height: constraints.maxHeight * 0.40,
                     child: ImageDefault(
                       radius: 0,
                       url: product.images.first,
@@ -126,31 +127,33 @@ class ProductPageShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
-          15.sizeH,
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const LoadingShimmerDefault(
-                  height: 20,
-                ),
-                15.sizeH,
-                const LoadingShimmerDefault(height: 20, width: 100),
-                15.sizeH,
-                const LoadingShimmerDefault(height: 50),
-                15.sizeH,
-                const LoadingShimmerDefault(height: 80, width: 150),
-                100.sizeH,
-                const LoadingShimmerDefault(height: 50),
-              ],
-            ),
-          )
-        ],
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
+            15.sizeH,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const LoadingShimmerDefault(
+                    height: 20,
+                  ),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 20, width: 100),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 50),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 80, width: 150),
+                  150.sizeH,
+                  const LoadingShimmerDefault(height: 50),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

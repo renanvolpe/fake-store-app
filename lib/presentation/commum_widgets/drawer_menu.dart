@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 
 //this is component of "left menu"
 class DrawerMenu extends StatelessWidget {
-   DrawerMenu({super.key, required this.scaffoldKey});
+  const DrawerMenu({super.key, required this.scaffoldKey});
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   bool checkCurrentRoute(context, String newPath) {
@@ -25,7 +25,7 @@ class DrawerMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration:  BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF03A9F4),
             ),
             child: Column(
@@ -44,31 +44,31 @@ class DrawerMenu extends StatelessWidget {
             ),
           ),
           ListTile(
-              leading:  Icon(Icons.home),
-              title:  Text('Início'),
+              leading: const Icon(Icons.home),
+              title: const Text('Início'),
               onTap: () {
-                context.go("/home");
+                context.pushReplacement("/home");
               }),
           profileInstance.user.role.contains("admin")
               ? ListTile(
-                  leading:  Icon(Icons.list),
-                  title:  Text('Meus produtos'),
+                  leading: const Icon(Icons.list),
+                  title: const Text('Meus produtos'),
                   onTap: () {
                     context.push("/home/categoriesEdit");
                   },
                 )
               : ListTile(
-                  leading:  Icon(Icons.list),
-                  title:  Text('Meus Pedidos'),
+                  leading: const Icon(Icons.list),
+                  title: const Text('Meus Pedidos'),
                   onTap: () => flushbarNotImplementedYet(context)),
           ListTile(
-              leading:  Icon(Icons.account_circle_sharp),
-              title:  Text('Meu Perfil'),
+              leading: const Icon(Icons.account_circle_sharp),
+              title: const Text('Meu Perfil'),
               onTap: () => context.go("/account")),
           ListTile(
-            leading:  Icon(Icons.logout),
-            title:  Text('Sair'),
-            onTap: () async{
+            leading: const Icon(Icons.logout),
+            title: const Text('Sair'),
+            onTap: () async {
               scaffoldKey.currentState?.closeDrawer();
               await GetIt.I.unregister<Profile>();
               context.go("/");

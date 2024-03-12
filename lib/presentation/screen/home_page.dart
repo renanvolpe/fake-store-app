@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fake_store_joao/core/default/empty_or_error_state_default.dart';
 import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_products/get_all_products_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/home_page_shimmer.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               );
             }
             if (state is GetAllProductsFailure) {
-              return const Text("Não há promoções a serem mostradas");
+              return const EmptyOrErrorStateDefault();
             }
             return const HomePageShimmer();
           },
