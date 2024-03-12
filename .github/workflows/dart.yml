@@ -10,7 +10,7 @@ on:
 
 jobs:   # Telling what jobs we need to happen
   build:      # Specify the building name and machine
-    name: Build & Release  # you can name the build whatever you want
+    name: Run Tests Flutter  # you can name the build whatever you want
     # device we want our code to run on ( macos - ubuntu - windows )
     # here we selected macos-latest to be able to get ios build
     runs-on: macos-latest 
@@ -28,11 +28,11 @@ jobs:   # Telling what jobs we need to happen
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.3'
+          flutter-version: '3.19.3'
           channel: 'stable'
         
       - name: Install Dependencies
-        run: flutter pub get
+        run: dart pub get
         
       - name: Test flutter app
         run: flutter test
