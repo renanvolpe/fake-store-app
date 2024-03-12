@@ -1,6 +1,6 @@
 import 'package:fake_store_joao/core/constants/endpoints.dart';
 import 'package:fake_store_joao/data/http/http_connection.dart';
-import 'package:fake_store_joao/data/models/user.dart';
+import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract class AuthenticationRequest {

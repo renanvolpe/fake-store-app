@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:fake_store_joao/data/models/user.dart';
+import 'package:fake_store_joao/data/models/profile/user/user.dart';
 
 class Profile {
   String token;

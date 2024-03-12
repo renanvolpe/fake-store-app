@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:fake_store_joao/data/models/profile.dart';
+import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';

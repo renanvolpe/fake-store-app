@@ -2,7 +2,7 @@ import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/data/models/category.dart';
-import 'package:fake_store_joao/data/models/profile.dart';
+import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/data/repositories/categories_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_category/edit_category_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';

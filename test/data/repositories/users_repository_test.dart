@@ -1,4 +1,4 @@
-import 'package:fake_store_joao/data/models/user.dart';
+import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:fake_store_joao/data/models/user_create.dart';
 import 'package:fake_store_joao/data/repositories/users_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
