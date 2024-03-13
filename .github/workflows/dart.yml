@@ -1,4 +1,4 @@
-name: "Make tests"   # You can name it as you want
+name: "Make tests"   
 
 on:
   pull_request:
@@ -8,11 +8,10 @@ on:
     branches:
       - develop
 
-jobs:   # Telling what jobs we need to happen
-  build:      # Specify the building name and machine
-    name: Run Tests Flutter  # you can name the build whatever you want
-    # device we want our code to run on ( macos - ubuntu - windows )
-    # here we selected macos-latest to be able to get ios build
+jobs:   
+  build:      
+    name: Run Tests Flutter  
+    
     runs-on: macos-latest 
 
     steps: 

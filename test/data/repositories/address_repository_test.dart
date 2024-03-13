@@ -1,32 +1,52 @@
+import 'package:fake_store_joao/data/models/address.dart';
+import 'package:fake_store_joao/data/repositories/adresses_repository.dart';
+import 'package:fake_store_joao/database/db.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:result_dart/result_dart.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+void main() async {
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+  Database database = await DB.instance.database;
 
-// class MockDatabase extends Mock implements Database {}
+  group("Groupt of test of user endpoint", () {
+    AddressesRepository localAddress = AddressesRepository( 50);
+    late int idSuccess;
+    test("test post address", () async {
+      var response = await localAddress.postAddresses(Address.empty());
 
-// void main() async {
-//   Database database;
-//   // Initialize FFI
-//   sqfliteFfiInit();
-//   // Change the default factory for unit testing calls for SQFlite
-//   databaseFactory = databaseFactoryFfi;
-//   databaseFactory.openDatabase(join(await getDatabasesPath(), "store.db"));
-//   database = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
+      response.onSuccess((success) => idSuccess = success);
 
-//   group("Groupt of test of user endpoint", () {
-    
-//     AddressesRepository localAddress = AddressesRepository(database);
-//     late String tokenUser;
-//     test("get address", () async {
-//       var response = await localAddress.getAddress();
+      expect(response, isA<Success>());
+    });
 
-//       response.onSuccess((success) => tokenUser = success);
+    // test("description", () => database.delete("address"));
 
-//       expect(response, isA<List>());
-//     });
+    test("test get list addresses", () async {
+      var response = await localAddress.getListAddresses();
 
-//     // test("get user s profile ", () async {
-//     //   var response = await apiAuth.getProfile(tokenUser);
+      expect(response, isA<Success>());
+    });
 
-//     //   expect(response, isA<Success>());
-//     // });
-//   });
-// }
+    test("test get address", () async {
+      var response = await localAddress.getAddress(idSuccess);
+
+      expect(response, isA<Success>());
+    });
+
+    test("test update address", () async {
+      var newAdd = Address.empty();
+      newAdd.city = "cidade diferente";
+      var response = await localAddress.putAddresses(newAdd);
+
+      expect(response, isA<Success>());
+    });
+
+    test("test get address", () async {
+      var response = await localAddress.deleteAdddresses(idSuccess);
+
+      expect(response, isA<Success>());
+    });
+  });
+}

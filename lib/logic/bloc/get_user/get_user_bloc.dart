@@ -11,6 +11,7 @@ class GetUserBloc extends Bloc<GetUserEvent, GetUserState> {
   GetUserBloc(AuthenticationRepository authenticationRepository) : super(GetUserInitial()) {
     on<GetUserStarted>((event, emit) async {
       var response = await authenticationRepository.getProfile(event.token);
+
       response.fold((success) {
         //USE CASE HERE
         if (GetIt.I.isRegistered<Profile>()) {

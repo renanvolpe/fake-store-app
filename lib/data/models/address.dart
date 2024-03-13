@@ -51,6 +51,10 @@ class Address {
     };
   }
 
+  factory Address.empty() {
+    return Address(id: 0, street: "", district: "", num: "", city: "", state: "", complement: "");
+  }
+
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
       id: map['id'] as int,
@@ -75,27 +79,24 @@ class Address {
   @override
   bool operator ==(covariant Address other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.street == street &&
-      other.district == district &&
-      other.num == num &&
-      other.city == city &&
-      other.state == state &&
-      other.complement == complement;
+
+    return other.id == id &&
+        other.street == street &&
+        other.district == district &&
+        other.num == num &&
+        other.city == city &&
+        other.state == state &&
+        other.complement == complement;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      street.hashCode ^
-      district.hashCode ^
-      num.hashCode ^
-      city.hashCode ^
-      state.hashCode ^
-      complement.hashCode;
+        street.hashCode ^
+        district.hashCode ^
+        num.hashCode ^
+        city.hashCode ^
+        state.hashCode ^
+        complement.hashCode;
   }
 }
-
-

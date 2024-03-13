@@ -1,67 +1,73 @@
 import 'package:fake_store_joao/data/models/address.dart';
 import 'package:fake_store_joao/database/db.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:result_dart/result_dart.dart';
 
 abstract class AddressesService {
-  getAddress();
+  getAddress(int id);
   getListAddresses();
-  postAddresses();
-  putAddresses();
-  deleteAdddresses();
+  postAddresses(Address address);
+  putAddresses(Address address);
+  deleteAdddresses(int id);
 }
 
 class AddressesRepository implements AddressesService {
-  late Database db;
+  late int idUser;
 
-  AddressesRepository(this.db);
+  AddressesRepository(this.idUser);
 
   @override
-  getAddress() async {
-    db = await DB.instance.database;
-    var listRetuns = await db.query("address");
-    print(listRetuns);
-    var listAddresses = [];
-    for (var element in listRetuns) {
-      listAddresses.add(Address.fromMap(element));
+  Future<Result<Address, String>> getAddress(int id) async {
+    var db = await DB.instance.database;
+    var address = await db.database
+        .rawQuery('SELECT * FROM address WHERE id = $id AND idUser = $idUser'); // here after request here
+    var addr = Address.fromMap(address.first);
+    return Success(addr);
+  }
+
+  @override
+  Future<Result<List<Address>, String>> getListAddresses() async {
+    var db = await DB.instance.database;
+    var listRetuns = await db.query("address", where: 'idUser = ?', whereArgs: [idUser]);
+
+    List<Address> addresses = listRetuns.map((map) => Address.fromMap(map)).toList();
+
+    return Success(addresses);
+  }
+
+  @override
+  Future<Result<int, String>> deleteAdddresses(int id) async {
+    try {
+      var db = await DB.instance.database;
+      int result = await db.delete("address", where: 'id = ? AND idUser = ?', whereArgs: [id, idUser]);
+      return Success(result);
+    } catch (e) {
+      return Failure(e.toString());
     }
-    return listAddresses;
   }
 
   @override
-  getListAddresses() {
-    // TODO: implement getListAddresses
-    throw UnimplementedError();
+  Future<Result<int, String>> postAddresses(Address address) async {
+    var db = await DB.instance.database;
+    Map<String, Object?> newMap = {
+      "idUser": idUser,
+    };
+    newMap.addAll(address.toMap());
+    newMap.removeWhere((key, value) => key == "id"); // remove id address
+
+    var idAddress = await db.insert("address", newMap);
+    return Success(idAddress);
   }
 
   @override
-  deleteAdddresses() {
-    // TODO: implement deleteAdddresses
-    throw UnimplementedError();
-  }
-
-  @override
-  postAddresses() async {
-    db = await DB.instance.database;
-    // street TEXT,
-    // district TEXT,
-    // num TEXT,
-    // city TEXT,
-    // state TEXT,
-    // complement TEXT
-    var listAddresses = await db.insert("address", {
-      "street": "street test2",
-      "district": "district test2",
-      "num": "num test2",
-      "city": "city test2",
-      "state": "state test2",
-      "complement": "complement test2",
-    });
-    print(listAddresses);
-  }
-
-  @override
-  putAddresses() {
-    // TODO: implement putAddresses
-    throw UnimplementedError();
+  Future<Result<int, String>> putAddresses(Address address) async {
+    try {
+      var db = await DB.instance.database;
+      Map<String, Object?> newMap = address.toMap();
+      newMap.remove("id"); // Assuming id is not updatable
+      int result = await db.update("address", newMap, where: 'id = ? AND idUser = ?', whereArgs: [address.id, idUser]);
+      return Success(result);
+    } catch (e) {
+      return Failure(e.toString());
+    }
   }
 }

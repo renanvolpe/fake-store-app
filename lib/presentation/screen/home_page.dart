@@ -8,7 +8,7 @@ import 'package:fake_store_joao/presentation/commum_widgets/promotion_section.da
 import 'package:fake_store_joao/presentation/commum_widgets/recent_highlight_section.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/scafold_with_drawer.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/select_categories.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/select_categories_and_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,8 +47,8 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     20.sizeH,
-                    const SelectCategories(),
-                    20.sizeH,
+                    const SelectCategoriesAndAddress(),
+                    10.sizeH,
                     PromotionSection(categoryIndex: categoryIndex, listProducts: listProducts),
                     5.sizeH,
                     if (listProducts.length >= 9)

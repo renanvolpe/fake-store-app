@@ -1,4 +1,4 @@
-import 'package:fake_store_joao/presentation/router/router.dart';
+import 'package:fake_store_joao/core/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

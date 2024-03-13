@@ -1,3 +1,6 @@
+import 'package:fake_store_joao/data/models/address.dart';
+import 'package:fake_store_joao/presentation/screen/addresses_edit_page.dart';
+import 'package:fake_store_joao/presentation/screen/addresses_page.dart';
 import 'package:fake_store_joao/presentation/screen/categories_edit_page.dart';
 import 'package:fake_store_joao/presentation/screen/categories_page.dart';
 import 'package:fake_store_joao/presentation/screen/home_page.dart';
@@ -12,8 +15,6 @@ import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
-
 final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: _rootNavigatorKey,
@@ -21,7 +22,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => LoginPage(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/register',
@@ -58,6 +59,13 @@ final router = GoRouter(
                     ProductDetailEditPage(idProd: int.parse(state.pathParameters['productsId']!)),
               ),
             ]),
+      ]),
+      GoRoute(path: 'address', builder: (context, state) => const AddressesPage(), routes: [
+        GoRoute(
+          name: "address_edit",
+          path: 'address_edit',
+          builder: (context, state) =>  AddressesEditPage(selectedAddress: state.extra as Address?),
+        ),
       ]),
     ]),
     GoRoute(

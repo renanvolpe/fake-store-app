@@ -1,6 +1,7 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/drawer_menu.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -31,9 +32,9 @@ class ScaffoldWithDrawe extends StatelessWidget {
         ),
         actions: [
           InkWell(
-            // onTap: () => AddressesRepository(DB()).getAddress(),
+            onTap: () => flushbarNotImplementedYet(context),
             child: Icon(
-              Icons.shopping_cart,
+              Icons.add_business_rounded,
               color: ColorsApp.kWhiteColor,
             ),
           ),
