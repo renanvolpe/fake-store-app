@@ -1,9 +1,10 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Style {
   static TextStyle get textStyle {
-    return const TextStyle(); // TODO put the font here
+    return GoogleFonts.dmSans();
   }
 
   static TextStyle defaultTextStyle = textStyle.copyWith(
@@ -22,7 +23,7 @@ class Style {
     fontWeight: FontWeight.bold,
   );
   static TextStyle hintTextStyle = textStyle.copyWith(
-    color: Colors.grey,
+    color: ColorsApp.kGrey,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );

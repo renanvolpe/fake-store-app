@@ -1,4 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:fake_store_joao/core/default/button_default.dart';
+import 'package:fake_store_joao/core/default/textfield_decoration_default.dart';
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
@@ -78,138 +81,106 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ],
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.lightBlue,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FractionallySizedBox(
-                widthFactor: 0.9,
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-                  child: Center(
-                    child: Column(
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background_image.jpg'),
+              fit: BoxFit.cover, // Adjust as per your need
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Volpe´s Store',
+                      style: Style.defaultLightTextStyle.copyWith(fontSize: 40, fontWeight: FontWeight.w600),
+                    ),
+                    20.sizeH,
+                    Text(
+                      'It´s a test app to show my abbilityies',
+                      textAlign: TextAlign.center,
+                      style: Style.defaultLightTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.w500),
+                    ),
+                    150.sizeH,
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Realize o login para continuar',
-                              style: Style.defaultTextStyle.copyWith(fontSize: 20),
-                            ),
-                          ],
-                        ),
                         35.sizeH,
-                        Text(
-                          'E-mail',
-                          style: Style.defaultTextStyle.copyWith(color: Colors.grey, fontSize: 17),
-                        ),
                         TextFormField(
                           controller: emailController,
-                          decoration: const InputDecoration(
-                            focusColor: Colors.white,
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
+                          decoration: textfieldDecorationDefault(hintText: "Email", prefixIcon: Icons.email_outlined),
                           cursorColor: Colors.grey,
                         ),
                         25.sizeH,
-                        Text(
-                          'Senha',
-                          style: Style.defaultTextStyle.copyWith(color: Colors.grey, fontSize: 17),
-                        ),
                         TextFormField(
                           controller: passwordController,
-                          decoration: const InputDecoration(
-                            focusColor: Colors.white,
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
+                          decoration:
+                              textfieldDecorationDefault(hintText: "Password", prefixIcon: Icons.lock_outline_rounded),
                           cursorColor: Colors.grey,
-                        ),
-                        25.sizeH,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Esqueci minha senha',
-                              style: Style.defaultTextStyle.copyWith(fontSize: 14),
-                            ),
-                          ],
                         ),
                         25.sizeH,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                                child: Material(
-                              child: InkWell(
-                                onTap: () =>
-                                    loginController.add(LoginStarted(emailController.text, passwordController.text)),
-                                child: Ink(
-                                    padding: const EdgeInsets.symmetric(vertical: 7),
-                                    color: Colors.lightBlue,
-                                    child: Center(
-                                        child: BlocBuilder<GetUserBloc, GetUserState>(
-                                      bloc: getUserController,
-                                      builder: (context, stateGetUser) {
-                                        return BlocBuilder<LoginBloc, LoginState>(
-                                          bloc: loginController,
-                                          builder: (context, state) {
-                                            if (state is LoginProgress || stateGetUser is GetUserProgress) {
-                                              return const Center(
-                                                  child: SizedBox(
-                                                      height: 22,
-                                                      width: 22,
-                                                      child: CircularProgressIndicator(
-                                                        color: Colors.white,
-                                                      )));
-                                            }
-                                            return Text(
-                                              "Entrar",
-                                              style: Style.defaultTextStyle.copyWith(fontSize: 17, color: Colors.white),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ))),
-                              ),
-                            ))
+                            Text(
+                              'Forgot Password',
+                              style: Style.defaultLightTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
                           ],
                         ),
-                        20.sizeH,
+                        25.sizeH,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
                                 child: InkWell(
-                              onTap: () {
-                                context.push("/register");
-                              },
-                              child: Ink(
-                                  padding: const EdgeInsets.symmetric(vertical: 5),
-                                  color: Colors.white,
-                                  child: Center(
-                                      child: Text(
-                                    "Cadastrar-se",
-                                    style: Style.defaultTextStyle
-                                        .copyWith(fontSize: 17, color: Colors.lightBlue, fontWeight: FontWeight.w500),
-                                  ))),
+                              onTap: () =>
+                                  loginController.add(LoginStarted(emailController.text, passwordController.text)),
+                              child: const ButtonBorderPrimary(text: "Sign in"),
                             ))
+                          ],
+                        ),
+                        25.sizeH,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                  onTap: () {
+                                    context.push("/register");
+                                  },
+                                  child: RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                      style: Style.defaultLightTextStyle,
+                                      children: <TextSpan>[
+                                        const TextSpan(text: 'Didn´t have any account? '),
+                                        TextSpan(
+                                          text: 'Sign Up here',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            decoration: TextDecoration.underline,
+                                            color: ColorsApp.kPrimary,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            )
                           ],
                         )
                       ],
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
