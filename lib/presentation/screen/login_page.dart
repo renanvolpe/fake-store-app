@@ -1,9 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
-import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
             if (state is LoginSuccess) {
               //it calls the get it to save Users data
               getUserController.add(GetUserStarted(state.token));
-              
             }
             if (state is LoginFailure) {
               // ignore: use_build_context_synchronously
@@ -54,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         BlocListener<GetUserBloc, GetUserState>(
           bloc: getUserController,
-          listener: (context, state) async{
-            if(state is GetUserSuccess){
+          listener: (context, state) async {
+            if (state is GetUserSuccess) {
               await Flushbar(
                 title: 'Login realizado com sucesso',
                 backgroundColor: Colors.green,
@@ -64,9 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                 duration: const Duration(milliseconds: 1500),
               ).show(context);
               // ignore: use_build_context_synchronously
-              context.push("/home");
+              context.pushReplacement("/home");
             }
-            if(state is GetUserFailure){
+            if (state is GetUserFailure) {
               Flushbar(
                 title: 'Erro de login',
                 backgroundColor: Colors.red,
@@ -75,7 +74,6 @@ class _LoginPageState extends State<LoginPage> {
                 duration: const Duration(seconds: 2),
               ).show(context);
             }
-            
           },
         ),
       ],
@@ -88,11 +86,8 @@ class _LoginPageState extends State<LoginPage> {
               FractionallySizedBox(
                 widthFactor: 0.9,
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5)),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,23 +97,20 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Text(
                               'Realize o login para continuar',
-                              style:
-                                  Style.defaultTextStyle.copyWith(fontSize: 20),
+                              style: Style.defaultTextStyle.copyWith(fontSize: 20),
                             ),
                           ],
                         ),
                         35.sizeH,
                         Text(
                           'E-mail',
-                          style: Style.defaultTextStyle
-                              .copyWith(color: Colors.grey, fontSize: 17),
+                          style: Style.defaultTextStyle.copyWith(color: Colors.grey, fontSize: 17),
                         ),
                         TextFormField(
                           controller: emailController,
                           decoration: const InputDecoration(
                             focusColor: Colors.white,
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
                             ),
@@ -128,15 +120,13 @@ class _LoginPageState extends State<LoginPage> {
                         25.sizeH,
                         Text(
                           'Senha',
-                          style: Style.defaultTextStyle
-                              .copyWith(color: Colors.grey, fontSize: 17),
+                          style: Style.defaultTextStyle.copyWith(color: Colors.grey, fontSize: 17),
                         ),
                         TextFormField(
                           controller: passwordController,
                           decoration: const InputDecoration(
                             focusColor: Colors.white,
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
                             ),
@@ -149,8 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Text(
                               'Esqueci minha senha',
-                              style:
-                                  Style.defaultTextStyle.copyWith(fontSize: 14),
+                              style: Style.defaultTextStyle.copyWith(fontSize: 14),
                             ),
                           ],
                         ),
@@ -161,40 +150,30 @@ class _LoginPageState extends State<LoginPage> {
                             Expanded(
                                 child: Material(
                               child: InkWell(
-                                onTap: () => loginController.add(LoginStarted(
-                                    emailController.text,
-                                    passwordController.text)),
+                                onTap: () =>
+                                    loginController.add(LoginStarted(emailController.text, passwordController.text)),
                                 child: Ink(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 7),
+                                    padding: const EdgeInsets.symmetric(vertical: 7),
                                     color: Colors.lightBlue,
                                     child: Center(
-                                        child: BlocBuilder<GetUserBloc,
-                                            GetUserState>(
+                                        child: BlocBuilder<GetUserBloc, GetUserState>(
                                       bloc: getUserController,
                                       builder: (context, stateGetUser) {
-                                        return BlocBuilder<LoginBloc,
-                                            LoginState>(
+                                        return BlocBuilder<LoginBloc, LoginState>(
                                           bloc: loginController,
                                           builder: (context, state) {
-                                            if (state is LoginProgress ||
-                                                stateGetUser
-                                                    is GetUserProgress) {
+                                            if (state is LoginProgress || stateGetUser is GetUserProgress) {
                                               return const Center(
                                                   child: SizedBox(
                                                       height: 22,
                                                       width: 22,
-                                                      child:
-                                                          CircularProgressIndicator(
+                                                      child: CircularProgressIndicator(
                                                         color: Colors.white,
                                                       )));
                                             }
                                             return Text(
                                               "Entrar",
-                                              style: Style.defaultTextStyle
-                                                  .copyWith(
-                                                      fontSize: 17,
-                                                      color: Colors.white),
+                                              style: Style.defaultTextStyle.copyWith(fontSize: 17, color: Colors.white),
                                             );
                                           },
                                         );
@@ -214,16 +193,13 @@ class _LoginPageState extends State<LoginPage> {
                                 context.push("/register");
                               },
                               child: Ink(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                  padding: const EdgeInsets.symmetric(vertical: 5),
                                   color: Colors.white,
                                   child: Center(
                                       child: Text(
                                     "Cadastrar-se",
-                                    style: Style.defaultTextStyle.copyWith(
-                                        fontSize: 17,
-                                        color: Colors.lightBlue,
-                                        fontWeight: FontWeight.w500),
+                                    style: Style.defaultTextStyle
+                                        .copyWith(fontSize: 17, color: Colors.lightBlue, fontWeight: FontWeight.w500),
                                   ))),
                             ))
                           ],

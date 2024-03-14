@@ -1,3 +1,6 @@
+import 'package:fake_store_joao/core/default/appbar_default.dart';
+import 'package:fake_store_joao/core/default/image_default.dart';
+import 'package:fake_store_joao/core/default/loading_shimmer.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
@@ -8,7 +11,6 @@ import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_no
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.idProd});
@@ -29,25 +31,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.kWhiteColor,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: ColorsApp.kWhiteColor,
-          ),
-        ),
-        backgroundColor: ColorsApp.kBackgroundColor,
-        centerTitle: true,
-        title: Text(
-          "Nome do produto",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
-        ),
-      ),
+      extendBodyBehindAppBar: true,
+      backgroundColor: ColorsApp.kWhite,
+      appBar: AppbarDefaultJustBackBtn(context),
       body: LayoutBuilder(
-        builder: (_, constraints) =>
-            BlocBuilder<GetProductBloc, GetProductState>(
+        builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(
           bloc: getProductController,
           builder: (context, state) {
             if (state is GetProductSuccess) {
@@ -57,9 +45,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   SizedBox(
                     width: constraints.maxWidth,
-                    height: constraints.maxHeight * 0.45,
-                    child: Image.network(
-                      product.images.first,
+                    height: constraints.maxHeight * 0.40,
+                    child: ImageDefault(
+                      radius: 0,
+                      url: product.images.first,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -72,31 +61,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           10.sizeH,
                           Text(
                             product.title,
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 22),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 22),
                           ),
                           15.sizeH,
                           Text(
                             "R\$ ${product.price}",
-                            style: Style.priceProductTextStyle
-                                .copyWith(fontSize: 20),
+                            style: Style.priceProductTextStyle.copyWith(fontSize: 20),
                           ),
                           15.sizeH,
                           Text(
                             "Descrição: ${product.description}",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
-                          Text(
-                              "Características: Muito Conforto, DryFit, Esportiva",
-                              style: Style.defaultTextStyle
-                                  .copyWith(fontSize: 14)),
+                          Text("Características: Muito Conforto, DryFit, Esportiva",
+                              style: Style.defaultTextStyle.copyWith(fontSize: 14)),
                           15.sizeH,
                           Text(
                             "Tamanho: ",
-                            style:
-                                Style.defaultTextStyle.copyWith(fontSize: 14),
+                            style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
                           const ChoseSize(),
@@ -109,14 +92,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   flushbarNotImplementedYet(context);
                                 },
                                 child: Ink(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                                   color: Colors.lightBlue,
                                   child: Center(
                                       child: Text(
                                     "Comprar",
-                                    style: Style.defaultLightTextStyle
-                                        .copyWith(fontSize: 22),
+                                    style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                                   )),
                                 ),
                               ))
@@ -130,10 +111,48 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               );
             }
-            return const Center(
-                child: SizedBox(
-                    width: 15, height: 15, child: CircularProgressIndicator()));
+            return const ProductPageShimmer();
           },
+        ),
+      ),
+    );
+  }
+}
+
+class ProductPageShimmer extends StatelessWidget {
+  const ProductPageShimmer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
+            15.sizeH,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const LoadingShimmerDefault(
+                    height: 20,
+                  ),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 20, width: 100),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 50),
+                  15.sizeH,
+                  const LoadingShimmerDefault(height: 80, width: 150),
+                  150.sizeH,
+                  const LoadingShimmerDefault(height: 50),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

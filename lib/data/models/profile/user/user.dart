@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:fake_store_joao/data/models/profile/user/email.dart';
+import 'package:fake_store_joao/data/models/profile/user/name.dart';
+import 'package:fake_store_joao/data/models/profile/user/password.dart';
+
 class User {
-  String name;
-  String email;
-  String password;
+  Name name;
+  Email email;
+  Password password;
   String avatar;
   String role;
   int id;
@@ -21,27 +25,7 @@ class User {
     required this.updatedAt,
   });
 
-  User copyWith({
-    String? name,
-    String? email,
-    String? password,
-    String? avatar,
-    String? role,
-    int? id,
-    String? creationAt,
-    String? updatedAt,
-  }) {
-    return User(
-      name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      avatar: avatar ?? this.avatar,
-      role: role ?? this.role,
-      id: id ?? this.id,
-      creationAt: creationAt ?? this.creationAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-    );
-  }
+
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -58,9 +42,9 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      name: map['name'] as String,
-      email: map['email'] as String,
-      password: map['password'] as String,
+      name: Name(map['name'] as String),
+      email: Email(map['email'] as String),
+      password: Password(map['password'] as String),
       avatar: map['avatar'] as String,
       role: map['role'] as String,
       id: map['id'] as int,

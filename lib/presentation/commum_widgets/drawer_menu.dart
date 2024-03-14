@@ -1,5 +1,5 @@
 import 'package:fake_store_joao/core/themes/style.dart';
-import 'package:fake_store_joao/data/models/profile.dart';
+import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class DrawerMenu extends StatelessWidget {
                 ),
                 15.sizeH,
                 Text(
-                  'Olá, ${profileInstance.user.name}',
+                  'Olá, ${profileInstance.user.name.value}',
                   style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                 ),
               ],
@@ -47,7 +47,7 @@ class DrawerMenu extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Início'),
               onTap: () {
-                context.go("/home");
+                context.pushReplacement("/home");
               }),
           profileInstance.user.role.contains("admin")
               ? ListTile(
@@ -68,7 +68,7 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Sair'),
-            onTap: () async{
+            onTap: () async {
               scaffoldKey.currentState?.closeDrawer();
               await GetIt.I.unregister<Profile>();
               context.go("/");

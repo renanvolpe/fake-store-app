@@ -1,6 +1,7 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/drawer_menu.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ScaffoldWithDrawe extends StatelessWidget {
         leading: IconButton(
           onPressed: () => scaffoldKey.currentState?.openDrawer(),
           icon: const Icon(Icons.menu),
-          color: ColorsApp.kWhiteColor,
+          color: ColorsApp.kWhite,
         ),
         centerTitle: true,
         title: Text(
@@ -30,14 +31,19 @@ class ScaffoldWithDrawe extends StatelessWidget {
           style: Style.defaultLightTextStyle.copyWith(fontSize: 30),
         ),
         actions: [
-          Icon(
-            Icons.shopping_cart,
-            color: ColorsApp.kWhiteColor,
+          InkWell(
+            onTap: () => flushbarNotImplementedYet(context),
+            child: Icon(
+              Icons.add_business_rounded,
+              color: ColorsApp.kWhite,
+            ),
           ),
           15.sizeW
         ],
       ),
-      drawer:  DrawerMenu(scaffoldKey: scaffoldKey,),
+      drawer: DrawerMenu(
+        scaffoldKey: scaffoldKey,
+      ),
       body: body,
     );
   }

@@ -9,14 +9,10 @@ void main() {
     ProductRepository apiProducts = ProductRepository();
     late Product productTest;
     test("Create Products", () async {
-      ProductCreate productCreate = ProductCreate(
-          title: "new Product",
-          price: 100,
-          description: "description here",
-          categodyId: 3,
-          images: [
-            "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg"
-          ]);
+      ProductCreate productCreate =
+          ProductCreate(title: "new Product", price: 100, description: "description here", categodyId: 2, images: [
+        "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg"
+      ]);
 
       var response = await apiProducts.createProduct(productCreate);
 
@@ -27,6 +23,11 @@ void main() {
 
     test("Get All products", () async {
       var response = await apiProducts.getAllProducts(productTest.category.id);
+      expect(response, isA<Success>());
+    });
+
+      test("Get All products but with no category", () async {
+      var response = await apiProducts.getAllProducts();
       expect(response, isA<Success>());
     });
 
