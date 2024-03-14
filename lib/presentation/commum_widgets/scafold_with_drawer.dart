@@ -23,7 +23,7 @@ class ScaffoldWithDrawe extends StatelessWidget {
         leading: IconButton(
           onPressed: () => scaffoldKey.currentState?.openDrawer(),
           icon: const Icon(Icons.menu),
-          color: ColorsApp.kWhiteColor,
+          color: ColorsApp.kWhite,
         ),
         centerTitle: true,
         title: Text(
@@ -35,7 +35,7 @@ class ScaffoldWithDrawe extends StatelessWidget {
             onTap: () => flushbarNotImplementedYet(context),
             child: Icon(
               Icons.add_business_rounded,
-              color: ColorsApp.kWhiteColor,
+              color: ColorsApp.kWhite,
             ),
           ),
           15.sizeW

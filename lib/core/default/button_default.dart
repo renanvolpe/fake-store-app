@@ -13,7 +13,7 @@ class ButtonBorderPrimary extends StatelessWidget {
     return Container(
         padding: EdgeInsets.symmetric(vertical: paddingV ?? 12, horizontal: paddingH ?? 10),
         decoration: BoxDecoration(
-            color: ColorsApp.kWhiteColor,
+            color: ColorsApp.kWhite,
             border: Border.all(width: 1, color: Colors.lightBlue),
             borderRadius: BorderRadius.circular(10)),
         child: text != null

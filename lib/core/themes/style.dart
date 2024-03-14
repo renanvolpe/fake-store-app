@@ -7,17 +7,17 @@ class Style {
   }
 
   static TextStyle defaultTextStyle = textStyle.copyWith(
-    color: ColorsApp.kBlackColor,
+    color: ColorsApp.kBlack,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
   static TextStyle defaultLightTextStyle = textStyle.copyWith(
-    color: ColorsApp.kWhiteColor,
+    color: ColorsApp.kWhite,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
   static TextStyle priceProductTextStyle = textStyle.copyWith(
-    color: ColorsApp.kBackgroundColor,
+    color: ColorsApp.kBackground,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );

@@ -38,7 +38,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.kBackgroundColor,
+      backgroundColor: ColorsApp.kBackground,
       appBar: AppbarDefault(context, "Selecione a categoria"),
       body: BlocBuilder<GetAllCategoriesBloc, GetAllCategoriesState>(
         bloc: categoriesController,

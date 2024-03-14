@@ -33,7 +33,7 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.kBackgroundColor,
+      backgroundColor: ColorsApp.kBackground,
       appBar: AppbarDefault(context, widget.nameCat ?? "Lista de produtos"),
       body: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
         bloc: getAllProductsController,

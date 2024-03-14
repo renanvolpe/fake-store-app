@@ -29,7 +29,7 @@ void main() {
           email: "renan@renan.com",
           password: "1234",
           avatar: "https://api.lorem.space/image/face?w=640&h=480",
-          role: "costumer");
+          role: "customer");
 
       var response = await apiUser.createUser(userCrate);
 

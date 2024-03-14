@@ -19,7 +19,7 @@ class UserRepository implements UsersRequest {
       "email": userCreate.email,
       "password": userCreate.password,
       "avatar": userCreate.avatar,
-      "role": "customer"
+      "role": userCreate.role
     };
 
     var response = await connect.httpPost(endpoint: Endpoints.users, body: body);

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
-import 'package:get_it/get_it.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:meta/meta.dart';
 
 part 'get_user_event.dart';
@@ -14,11 +14,8 @@ class GetUserBloc extends Bloc<GetUserEvent, GetUserState> {
 
       response.fold((success) {
         //USE CASE HERE
-        if (GetIt.I.isRegistered<Profile>()) {
-          GetIt.I.get<Profile>().setNewProfile(Profile(token: event.token, user: success));
-        } else {
-          GetIt.instance.registerSingleton<Profile>(Profile(token: event.token, user: success));
-        }
+
+        SetupBinds.setupBindsHome(Profile(token: event.token, user: success));
 
         emit(GetUserSuccess());
       }, (failure) => GetUserFailure());

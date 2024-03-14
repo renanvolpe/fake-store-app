@@ -32,7 +32,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: ColorsApp.kWhiteColor,
+      backgroundColor: ColorsApp.kWhite,
       appBar: AppbarDefaultJustBackBtn(context),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(

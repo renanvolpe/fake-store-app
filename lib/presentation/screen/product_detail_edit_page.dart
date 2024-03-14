@@ -38,7 +38,7 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.kWhiteColor,
+      backgroundColor: ColorsApp.kWhite,
       appBar: AppbarDefault(context, "Edite um produto"),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocConsumer<GetProductBloc, GetProductState>(

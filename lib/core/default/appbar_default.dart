@@ -10,7 +10,7 @@ AppBar AppbarDefault(BuildContext context, String text) {
       onPressed: () => Navigator.pop(context),
       icon: Icon(
         Icons.arrow_back,
-        color: ColorsApp.kWhiteColor,
+        color: ColorsApp.kWhite,
       ),
     ),
     title: Text(
@@ -20,11 +20,11 @@ AppBar AppbarDefault(BuildContext context, String text) {
     actions: [
       Icon(
         Icons.menu,
-        color: ColorsApp.kWhiteColor,
+        color: ColorsApp.kWhite,
       ),
       15.sizeW
     ],
-    backgroundColor: ColorsApp.kBackgroundColor,
+    backgroundColor: ColorsApp.kBackground,
   );
 }
 

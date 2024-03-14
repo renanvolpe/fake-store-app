@@ -11,7 +11,7 @@ void main() async {
   Database database = await DB.instance.database;
 
   group("Groupt of test of user endpoint", () {
-    AddressesRepository localAddress = AddressesRepository( 50);
+    AddressesRepository localAddress = AddressesRepository(50);
     late int idSuccess;
     test("test post address", () async {
       var response = await localAddress.postAddresses(Address.empty());
