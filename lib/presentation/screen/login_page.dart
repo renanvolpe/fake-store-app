@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
+import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/core/default/textfield_decoration_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
@@ -139,10 +140,20 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                                child: InkWell(
-                              onTap: () =>
-                                  loginController.add(LoginStarted(emailController.text, passwordController.text)),
-                              child: const ButtonBorderPrimary(text: "Sign in"),
+                                child: BlocBuilder<LoginBloc, LoginState>(
+                              bloc: loginController,
+                              builder: (context, state) {
+                                if (state is LoginProgress) {
+                                  return const InkWell(
+                                    child: ButtonBorderPrimary(child: CircularProgressIndicatorDefault(isLight: true)),
+                                  );
+                                }
+                                return InkWell(
+                                  onTap: () =>
+                                      loginController.add(LoginStarted(emailController.text, passwordController.text)),
+                                  child: const ButtonBorderPrimary(text: "Sign in"),
+                                );
+                              },
                             ))
                           ],
                         ),

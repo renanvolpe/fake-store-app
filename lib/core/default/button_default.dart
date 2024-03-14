@@ -16,7 +16,7 @@ class ButtonBorderPrimary extends StatelessWidget {
         child: text != null
             ? Text(text!,
                 style:
-                    Style.defaultTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 18, color: ColorsApp.kWhite),
+                    Style.defaultTextStyle.copyWith(fontWeight: FontWeight.w500, fontSize: 18, color: ColorsApp.kWhite),
                 textAlign: TextAlign.center)
             : child);
   }

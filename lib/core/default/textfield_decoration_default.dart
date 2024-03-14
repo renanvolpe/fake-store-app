@@ -26,5 +26,5 @@ InputDecoration textfieldDecorationDefault(
         fontSize: 18.5,
         fontWeight: FontWeight.w400,
       ),
-      prefixIcon: Icon(prefixIcon, color: ColorsApp.kGrey));
+      prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: ColorsApp.kGrey) : null);
 }
