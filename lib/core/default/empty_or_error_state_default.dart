@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class EmptyOrErrorStateDefault extends StatelessWidget {
   const EmptyOrErrorStateDefault({
-    super.key,  this.text,
+    super.key,
+    this.text,
   });
- final String? text;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class EmptyOrErrorStateDefault extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        
         ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: Container(
@@ -28,9 +30,9 @@ class EmptyOrErrorStateDefault extends StatelessWidget {
             15.sizeW,
             Expanded(
               child: Text(
-                text ?? "Desculpe, Não há dados a serem mostradas :(",
+                text ?? "Desculpe, não há dados a serem mostradas :(",
                 textAlign: TextAlign.center,
-                style: Style.defaultLightTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w600),
+                style: Style.defaultTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w600),
               ),
             ),
             15.sizeW,

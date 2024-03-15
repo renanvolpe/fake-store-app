@@ -10,12 +10,12 @@ class Style {
   static TextStyle defaultTextStyle = textStyle.copyWith(
     color: ColorsApp.kBlack,
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle defaultLightTextStyle = textStyle.copyWith(
     color: ColorsApp.kWhite,
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle priceProductTextStyle = textStyle.copyWith(
     color: ColorsApp.kBackground,
@@ -25,6 +25,6 @@ class Style {
   static TextStyle hintTextStyle = textStyle.copyWith(
     color: ColorsApp.kGrey,
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
   );
 }

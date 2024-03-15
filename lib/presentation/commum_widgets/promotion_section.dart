@@ -23,7 +23,7 @@ class PromotionSection extends StatelessWidget {
       children: [
         Text(
           "Promoções",
-          style: Style.defaultLightTextStyle.copyWith(fontSize: 24),
+          style: Style.defaultTextStyle.copyWith(fontSize: 24),
         ),
         15.sizeH,
         StaggeredGrid.count(

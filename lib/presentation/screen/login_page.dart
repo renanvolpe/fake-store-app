@@ -83,7 +83,6 @@ class _LoginPageState extends State<LoginPage> {
       ],
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.lightBlue,
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -98,9 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Volpe´s Store',
-                      style: Style.defaultLightTextStyle.copyWith(fontSize: 40, fontWeight: FontWeight.w600),
+                    Image.asset(
+                      width: 200,
+                      "assets/images/logo-no-background.png",
                     ),
                     20.sizeH,
                     Text(
@@ -148,11 +147,10 @@ class _LoginPageState extends State<LoginPage> {
                                     child: ButtonBorderPrimary(child: CircularProgressIndicatorDefault(isLight: true)),
                                   );
                                 }
-                                return InkWell(
-                                  onTap: () =>
-                                      loginController.add(LoginStarted(emailController.text, passwordController.text)),
-                                  child: const ButtonBorderPrimary(text: "Sign in"),
-                                );
+                                return ButtonBorderPrimary(
+                                    onTap: () => loginController
+                                        .add(LoginStarted(emailController.text, passwordController.text)),
+                                    text: "Sign in");
                               },
                             ))
                           ],

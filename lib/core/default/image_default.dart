@@ -1,5 +1,6 @@
 import 'package:fake_store_joao/core/default/loading_shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ImageDefault extends StatelessWidget {
   const ImageDefault({
@@ -24,7 +25,7 @@ class ImageDefault extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        LoadingShimmerDefault(height: height),
+        ClipRRect(borderRadius: BorderRadius.circular(radius), child: LoadingShimmerDefault(height: height)),
         ClipRRect(
           borderRadius: BorderRadius.circular(radius),
           child: url.isEmpty

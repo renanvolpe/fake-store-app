@@ -24,7 +24,7 @@ class RecentHighlightsSection extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 15),
           child: Text(
             "Destaques recentes",
-            style: Style.defaultLightTextStyle.copyWith(fontSize: 24),
+            style: Style.defaultTextStyle.copyWith(fontSize: 24),
           ),
         ),
         StaggeredGrid.count(

@@ -37,34 +37,38 @@ class _HomePageState extends State<HomePage> {
     return ScaffoldWithDrawe(
       title: "Home",
       body: RefreshIndicator(
-        onRefresh: () async => getAllProductsController.add(GetAllProductsStarted()),
-        child: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
-          bloc: getAllProductsController,
-          builder: (context, state) {
-            if (state is GetAllProductsSuccess) {
-              var listProducts = state.listProducts;
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    20.sizeH,
-                    const SelectCategoriesAndAddress(),
-                    10.sizeH,
-                    PromotionSection(categoryIndex: categoryIndex, listProducts: listProducts),
-                    5.sizeH,
-                    if (listProducts.length >= 9)
-                      RecentHighlightsSection(categoryIndex: categoryIndex, listProducts: listProducts),
-                    25.sizeH
-                  ],
-                ),
-              );
-            }
-            if (state is GetAllProductsFailure) {
-              return const EmptyOrErrorStateDefault();
-            }
-            return const HomePageShimmer();
-          },
-        ),
-      ),
+          onRefresh: () async => getAllProductsController.add(GetAllProductsStarted()),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                20.sizeH,
+                const SelectCategoriesAndAddress(),
+                20.sizeH,
+                BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
+                  bloc: getAllProductsController,
+                  builder: (context, state) {
+                    if (state is GetAllProductsFailure) {
+                      return const EmptyOrErrorStateDefault();
+                    }
+                    if (state is GetAllProductsProgress) {
+                      return const HomePageShimmer();
+                    }
+                    return Column(
+                      children: [
+                        if (state is GetAllProductsSuccess) ...[
+                          PromotionSection(categoryIndex: categoryIndex, listProducts: state.listProducts),
+                          // 5.sizeH,
+                          if (state.listProducts.length >= 9)
+                            RecentHighlightsSection(categoryIndex: categoryIndex, listProducts: state.listProducts),
+                          25.sizeH
+                        ]
+                      ],
+                    );
+                  },
+                )
+              ],
+            ),
+          )),
     );
   }
 }

@@ -10,7 +10,7 @@ void main() {
     late Product productTest;
     test("Create Products", () async {
       ProductCreate productCreate =
-          ProductCreate(title: "new Product", price: 100, description: "description here", categodyId: 2, images: [
+          ProductCreate(title: "new Product", price: 100, description: "description here", categodyId: 28, images: [
         "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg"
       ]);
 
