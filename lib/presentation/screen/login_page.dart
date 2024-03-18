@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  var emailController = TextEditingController(text: "renan@renan.com");
+  var emailController = TextEditingController(text: "joao@joao.com");
   var passwordController = TextEditingController(text: "1234");
 
   @override
