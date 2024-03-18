@@ -61,7 +61,7 @@ class _SelectCategoriesAndAddressState extends State<SelectCategoriesAndAddress>
                         5.sizeW,
                         Text(
                           "Adresses",
-                          style: Style.defaultTextStyle.copyWith(fontSize: 24),
+                          style: Style.defaultTextStyle.copyWith(fontSize: 18),
                         ),
                       ],
                     ),

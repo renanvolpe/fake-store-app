@@ -75,15 +75,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                           15.sizeH,
                           Text(
-                            "Descrição: ${product.description}",
+                            "Description: ${product.description}",
                             style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
-                          Text("Características: Muito Conforto, DryFit, Esportiva",
+                          Text("Features: Muito Conforto, DryFit, Esportiva",
                               style: Style.defaultTextStyle.copyWith(fontSize: 16)),
                           15.sizeH,
                           Text(
-                            "Tamanho: ",
+                            "Sizes: ",
                             style: Style.defaultTextStyle.copyWith(fontSize: 18),
                           ),
                           15.sizeH,
@@ -101,7 +101,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   color: ColorsApp.kPrimary,
                                   child: Center(
                                       child: Text(
-                                    "Comprar",
+                                    "Buy",
                                     style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                                   )),
                                 ),
@@ -132,33 +132,31 @@ class ProductPageShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
-            15.sizeH,
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const LoadingShimmerDefault(
-                    height: 20,
-                  ),
-                  15.sizeH,
-                  const LoadingShimmerDefault(height: 20, width: 100),
-                  15.sizeH,
-                  const LoadingShimmerDefault(height: 50),
-                  15.sizeH,
-                  const LoadingShimmerDefault(height: 80, width: 150),
-                  150.sizeH,
-                  const LoadingShimmerDefault(height: 50),
-                ],
-              ),
-            )
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LoadingShimmerDefault(height: MediaQuery.sizeOf(context).height * 0.40),
+          15.sizeH,
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const LoadingShimmerDefault(
+                  height: 20,
+                ),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 20, width: 100),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 50),
+                15.sizeH,
+                const LoadingShimmerDefault(height: 80, width: 150),
+                150.sizeH,
+                const LoadingShimmerDefault(height: 50),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

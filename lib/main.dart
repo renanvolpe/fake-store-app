@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Volpe app',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: ColorsApp.kPrimary),
         useMaterial3: true,

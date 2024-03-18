@@ -42,9 +42,9 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
 
   bool _isToAdd() => widget.selectedAddress == null;
 
-  String _getTitle() => _isToAdd() ? "Adicione novo endereço" : "Edite seu endereço";
+  String _getTitle() => _isToAdd() ? "Add new address" : "Edit Address";
 
-  String _getTitleButton() => _isToAdd() ? "Adicione endereço" : "Atualize endereço";
+  String _getTitleButton() => _isToAdd() ? "Add address" : "Update Address";
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +59,18 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
             child: Column(
               children: [
                 15.sizeH,
-                TextFieldAddress(text: address.street, hintText: 'Rua', onChanged: (v) => address.street = v),
+                TextFieldAddress(text: address.street, hintText: 'Street', onChanged: (v) => address.street = v),
                 15.sizeH,
-                TextFieldAddress(text: address.district, hintText: 'Bairro', onChanged: (v) => address.district = v),
+                TextFieldAddress(text: address.district, hintText: 'District', onChanged: (v) => address.district = v),
                 15.sizeH,
-                TextFieldAddress(text: address.city, hintText: 'Cidade', onChanged: (v) => address.city = v),
+                TextFieldAddress(text: address.city, hintText: 'City', onChanged: (v) => address.city = v),
                 15.sizeH,
-                TextFieldAddress(text: address.state, hintText: 'Estado', onChanged: (v) => address.state = v),
+                TextFieldAddress(text: address.state, hintText: 'State', onChanged: (v) => address.state = v),
                 15.sizeH,
-                TextFieldAddress(text: address.num, hintText: 'Número', onChanged: (v) => address.num = v),
+                TextFieldAddress(text: address.num, hintText: 'Number', onChanged: (v) => address.num = v),
                 15.sizeH,
                 TextFieldAddress(
-                    text: address.complement, hintText: 'Complemento', onChanged: (v) => address.complement = v),
+                    text: address.complement, hintText: 'Complement', onChanged: (v) => address.complement = v),
                 150.sizeH,
                 Row(
                   children: [

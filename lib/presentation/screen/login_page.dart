@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     20.sizeH,
                     Text(
-                      'It´s a test app to show my abbilityies',
+                      'It´s a test app to show my abbilities',
                       textAlign: TextAlign.center,
                       style: Style.defaultLightTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.w500),
                     ),
