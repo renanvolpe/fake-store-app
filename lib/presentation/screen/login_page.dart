@@ -7,6 +7,7 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var emailController = TextEditingController(text: "renan@renan.com");
+  var passwordController = TextEditingController(text: "1234");
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +115,14 @@ class _LoginPageState extends State<LoginPage> {
                         35.sizeH,
                         TextFormField(
                           controller: emailController,
+                          readOnly: true,
                           decoration: textfieldDecorationDefault(hintText: "Email", prefixIcon: Icons.email_outlined),
                           cursorColor: Colors.grey,
                         ),
                         25.sizeH,
                         TextFormField(
                           controller: passwordController,
+                          readOnly: true,
                           decoration:
                               textfieldDecorationDefault(hintText: "Password", prefixIcon: Icons.lock_outline_rounded),
                           cursorColor: Colors.grey,
@@ -162,7 +165,8 @@ class _LoginPageState extends State<LoginPage> {
                             Expanded(
                               child: InkWell(
                                   onTap: () {
-                                    context.push("/register");
+                                    flushbarNotImplementedYet(context);
+                                    // context.push("/register");
                                   },
                                   child: RichText(
                                     textAlign: TextAlign.center,
