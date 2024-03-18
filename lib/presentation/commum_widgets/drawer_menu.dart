@@ -1,3 +1,4 @@
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
@@ -25,14 +26,14 @@ class DrawerMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Color(0xFF03A9F4),
+            decoration: BoxDecoration(
+              color: ColorsApp.kPrimary,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'SalgReis Store',
+                  'Volpe Store',
                   style: Style.defaultLightTextStyle.copyWith(fontSize: 40),
                 ),
                 15.sizeH,

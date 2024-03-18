@@ -1,4 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:fake_store_joao/core/default/appbar_default.dart';
+import 'package:fake_store_joao/core/default/button_default.dart';
+import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
+import 'package:fake_store_joao/core/default/textfield_decoration_default.dart';
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/user_create.dart';
 import 'package:fake_store_joao/data/repositories/users_repository.dart';
@@ -52,192 +57,102 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Cadastre-se para nova conta"),
-        ),
+        resizeToAvoidBottomInset: false,
+        backgroundColor: ColorsApp.kWhite,
+        appBar: AppbarDefault(context, "Cadastre-se"),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                45.sizeH,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(alignment: Alignment.center, children: [
-                      CircleAvatar(
-                        radius: 55,
-                        backgroundColor: Colors.lightBlue.shade100,
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 55,
-                        ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              45.sizeH,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(alignment: Alignment.center, children: [
+                    CircleAvatar(
+                      radius: 55,
+                      backgroundColor: ColorsApp.kPrimary,
+                      child: Icon(
+                        Icons.person,
+                        color: ColorsApp.kWhite,
+                        size: 55,
                       ),
-                      Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                              decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(50)),
-                              padding: const EdgeInsets.all(5),
-                              child: const Icon(
-                                Icons.edit,
-                                size: 20,
-                                color: Colors.white,
-                              )))
-                    ])
-                  ],
-                ),
-                35.sizeH,
-                Row(
-                  children: [
-                    5.sizeW,
-                    Text(
-                      "E-mail",
-                      style: Style.defaultTextStyle,
                     ),
-                  ],
-                ),
-                5.sizeH,
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      hintText: "Escreva seu e-mail aqui",
-                      hintStyle: Style.hintTextStyle),
-                ),
-                20.sizeH,
-                Row(
-                  children: [
-                    5.sizeW,
-                    Text(
-                      "Nome",
-                      style: Style.defaultTextStyle,
-                    ),
-                  ],
-                ),
-                5.sizeH,
-                TextFormField(
-                  controller: nameController,
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      hintText: "Escreva seu e-mail aqui",
-                      hintStyle: Style.hintTextStyle),
-                ),
-                20.sizeH,
-                Row(
-                  children: [
-                    5.sizeW,
-                    Text(
-                      "Senha",
-                      style: Style.defaultTextStyle,
-                    ),
-                  ],
-                ),
-                5.sizeH,
-                TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      hintText: "Escreva seu e-mail aqui",
-                      hintStyle: Style.hintTextStyle),
-                ),
-                20.sizeH,
-                Row(
-                  children: [
-                    5.sizeW,
-                    Text(
-                      "Confirmar Senha",
-                      style: Style.defaultTextStyle,
-                    ),
-                  ],
-                ),
-                5.sizeH,
-                TextFormField(
-                  controller: confirmPassController,
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      hintText: "Escreva seu e-mail aqui",
-                      hintStyle: Style.hintTextStyle),
-                ),
-                100.sizeH,
-                BlocBuilder<CreateUserBloc, CreateUserState>(
-                  bloc: createUserController,
-                  builder: (context, state) {
-                    if (state is CreateUserProgress) {
-                      return InkWell(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                            decoration: BoxDecoration(color: ColorsApp.kBlack, borderRadius: BorderRadius.circular(50)),
+                            padding: const EdgeInsets.all(5),
+                            child: Icon(
+                              Icons.edit,
+                              size: 20,
+                              color: ColorsApp.kWhite,
+                            )))
+                  ])
+                ],
+              ),
+              25.sizeH,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Enter the details below to register", style: Style.defaultTextStyle.copyWith(fontSize: 18))
+                ],
+              ),
+              25.sizeH,
+              TextFormField(
+                controller: emailController,
+                decoration: textfieldDecorationDefault(hintText: "Email"),
+              ),
+              20.sizeH,
+              5.sizeH,
+              TextFormField(
+                controller: nameController,
+                decoration: textfieldDecorationDefault(hintText: "Name"),
+              ),
+              20.sizeH,
+              TextFormField(
+                controller: passwordController,
+                decoration: textfieldDecorationDefault(hintText: "Password"),
+              ),
+              20.sizeH,
+              TextFormField(
+                controller: confirmPassController,
+                decoration: textfieldDecorationDefault(hintText: "Confirm password"),
+              ),
+              const Spacer(),
+              BlocBuilder<CreateUserBloc, CreateUserState>(
+                bloc: createUserController,
+                builder: (context, state) {
+                  if (state is CreateUserProgress) {
+                    return const InkWell(
+                        child: Row(
+                      children: [
+                        Expanded(child: ButtonBorderPrimary(child: CircularProgressIndicatorDefault(isLight: true))),
+                      ],
+                    ));
+                  }
+                  return InkWell(
+                      onTap: () {
+                        var userCreate = UserCreate(
+                            name: nameController.text,
+                            email: emailController.text,
+                            password: passwordController.text,
+                            avatar: "https://api.lorem.space/image/face?w=640&h=480",
+                            role: "customer");
+                        createUserController.add(CreateUserStarted(userCreate));
+                      },
+                      child: const Row(
                         children: [
-                          Expanded(
-                            child: Ink(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.lightBlue,
-                              ),
-                              child: const Center(
-                                  child: SizedBox(
-                                      height: 17,
-                                      width: 17,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        color: Colors.white,
-                                      ))),
-                            ),
-                          ),
+                          Expanded(child: ButtonBorderPrimary(text: "Criar conta")),
                         ],
                       ));
-                    }
-                    return InkWell(
-                        onTap: () {
-                          var userCreate = UserCreate(
-                              name: nameController.text,
-                              email: emailController.text,
-                              password: passwordController.text,
-                              avatar: "https://api.lorem.space/image/face?w=640&h=480",
-                              role: "Costumer");
-                          createUserController.add(CreateUserStarted(userCreate));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Ink(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.lightBlue,
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "Criar conta",
-                                  style: Style.defaultLightTextStyle,
-                                )),
-                              ),
-                            ),
-                          ],
-                        ));
-                  },
-                ),
-                20.sizeH,
-              ],
-            ),
+                },
+              ),
+              30.sizeH,
+            ],
           ),
         ),
       ),

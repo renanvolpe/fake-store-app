@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
+import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/data/models/profile/profile_controller.dart';
 import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:fake_store_joao/data/repositories/users_repository.dart';
@@ -56,13 +57,12 @@ class ButtonUpdateUser extends StatelessWidget {
                 },
                 child: const ButtonBorderPrimary(
                   paddingH: 30,
-                  child: CircularProgressIndicator(color: Colors.lightBlue),
+                  child: CircularProgressIndicatorDefault(isLight: true),
                 ),
               );
             }
             return InkWell(
               onTap: () {
-                print(user.name);
                 var isValid = controller.validate();
                 if (isValid) {
                   putUserBloc.add(PutUserStarted(user: user));

@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none'
 
 
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -31,6 +31,8 @@ dependencies:
   shimmer: ^3.0.0
   sqflite: ^2.3.2
   path: ^1.9.0
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -38,7 +40,26 @@ dev_dependencies:
     
   flutter_lints: ^2.0.0
   sqflite_common_ffi: ^2.3.2+1
-  mockito: ^5.2.0 #mockito: ^5.4.4
+  mockito: ^5.4.4 
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo-color-cropped.png"
+  min_sdk_android: 21 
+  web:
+    generate: true
+    image_path: "assets/images/logo-color-cropped.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/logo-color-cropped.png"
+    icon_size: 48 
+  macos:
+    generate: true
+    image_path: "assets/images/logo-color-cropped.png"
 
 flutter:
 

@@ -1,4 +1,4 @@
-package com.example.fake_store_joao
+package com.volpe.fake_store_joao
 
 import io.flutter.embedding.android.FlutterActivity
 

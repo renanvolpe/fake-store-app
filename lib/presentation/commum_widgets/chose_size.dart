@@ -1,3 +1,4 @@
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:flutter/material.dart';
 
@@ -28,23 +29,19 @@ class _ChoseSizeState extends State<ChoseSize> {
               },
               child: sizeChosen == i
                   ? Ink(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 15),
-                      color: Colors.lightBlue,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                      color: ColorsApp.kPrimary,
                       child: Text(
                         listSizes[i],
-                        style:
-                            Style.defaultLightTextStyle.copyWith(fontSize: 18),
+                        style: Style.defaultLightTextStyle.copyWith(fontSize: 18),
                       ),
                     )
                   : Ink(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 15),
-                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                      color: ColorsApp.kWhite,
                       child: Text(
                         listSizes[i],
-                        style: Style.defaultLightTextStyle
-                            .copyWith(fontSize: 18, color: Colors.lightBlue),
+                        style: Style.defaultLightTextStyle.copyWith(fontSize: 18, color: ColorsApp.kPrimary),
                       ),
                     ),
             ),

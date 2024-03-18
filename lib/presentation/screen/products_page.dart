@@ -96,10 +96,10 @@ class _ProductsPageState extends State<ProductsPage> {
                           overflow: TextOverflow.fade,
                           style: Style.defaultTextStyle.copyWith(fontSize: 20),
                         ),
-                        30.sizeH,
+                        15.sizeH,
                         Text(
-                          "R,${listProducts[i].price}",
-                          style: Style.priceProductTextStyle.copyWith(fontSize: 18),
+                          "R${listProducts[i].price},00",
+                          style: Style.defaultTextStyle.copyWith(fontSize: 18),
                         ),
                         Text(
                           "6 produtos em estoque",
@@ -109,7 +109,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     ),
                   ),
                   const Spacer(),
-                  const Icon(Icons.chevron_right)
+                  Icon(Icons.chevron_right, color: ColorsApp.kPrimary)
                 ]),
               ),
             ),

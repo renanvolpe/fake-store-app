@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/address.dart';
 import 'package:fake_store_joao/logic/bloc/delete_address/delete_address_bloc.dart';
@@ -39,7 +40,7 @@ class _AddressesPageState extends State<AddressesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarDefault(context, "Selecione seu endereço"),
+      appBar: AppbarDefault(context, "Adresses"),
       body: Stack(
         children: [
           BlocListener<DeleteAddressBloc, DeleteAddressState>(
@@ -59,7 +60,6 @@ class _AddressesPageState extends State<AddressesPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  15.sizeH,
                   BlocBuilder<GetListAddressBloc, GetListAddressState>(
                     bloc: getListAddressBloc,
                     builder: (context, state) {
@@ -89,21 +89,20 @@ class _AddressesPageState extends State<AddressesPage> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () async {
-                      await context.pushNamed("address_edit");
-                      getListAddressBloc.add(GetListAddressStarted());
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      child: ButtonBorderPrimary(text: "Adicionar endereço"),
-                    ),
-                  ),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ButtonBorderPrimary(
+                      onTap: () async {
+                        await context.pushNamed("address_edit");
+                        getListAddressBloc.add(GetListAddressStarted());
+                      },
+                      text: "Add address"),
+                  15.sizeH
+                ],
+              ),
             ),
           ),
         ],
@@ -131,21 +130,21 @@ class AddressCard extends StatelessWidget {
       builder: (context, stateSelect) {
         bool isSelected = address.id == stateSelect?.id;
         return Card(
-          color: Colors.lightBlue,
+          color: ColorsApp.kPrimary,
           margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
-            side: BorderSide(color: isSelected ? Colors.black : Colors.transparent, width: 2),
+            side: BorderSide(color: isSelected ? ColorsApp.kDarkGrey : Colors.transparent, width: 2),
           ),
           child: ListTile(
             // isThreeLine: true,
-            leading: const CircleAvatar(
+            leading: CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: 30,
                 child: Center(
                   child: Icon(
                     Icons.house,
-                    color: Colors.lightBlue,
+                    color: ColorsApp.kPrimary,
                   ),
                 )),
             title: Text(

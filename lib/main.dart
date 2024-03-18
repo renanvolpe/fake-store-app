@@ -1,4 +1,5 @@
 import 'package:fake_store_joao/core/router/router.dart';
+import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Volpe app',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorsApp.kPrimary),
         useMaterial3: true,
       ),
       routerConfig: router,

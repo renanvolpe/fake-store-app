@@ -5,17 +5,19 @@ import 'package:flutter/material.dart';
 
 AppBar AppbarDefault(BuildContext context, String text) {
   return AppBar(
+    foregroundColor: ColorsApp.kWhite,
+    backgroundColor: Colors.transparent,
     centerTitle: true,
     leading: IconButton(
       onPressed: () => Navigator.pop(context),
       icon: Icon(
-        Icons.arrow_back,
-        color: ColorsApp.kWhite,
+        Icons.chevron_left,
+        color: ColorsApp.kBlack,
       ),
     ),
     title: Text(
       text,
-      style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
+      style: Style.defaultTextStyle.copyWith(fontSize: 22),
     ),
     actions: [
       Icon(
@@ -24,7 +26,6 @@ AppBar AppbarDefault(BuildContext context, String text) {
       ),
       15.sizeW
     ],
-    backgroundColor: ColorsApp.kBackground,
   );
 }
 

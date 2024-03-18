@@ -7,7 +7,7 @@ void main() {
     AuthenticationRepository apiAuth = AuthenticationRepository();
     late String tokenUser;
     test("login user", () async {
-      var response = await apiAuth.loginUser("renan@renan.com", "1234");
+      var response = await apiAuth.loginUser("joao@joao.com", "1234");
 
       response.onSuccess((success) => tokenUser = success);
 
