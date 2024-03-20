@@ -1,6 +1,5 @@
 import 'package:fake_store_joao/data/models/address.dart';
 import 'package:fake_store_joao/data/repositories/adresses_repository.dart';
-import 'package:fake_store_joao/database/db.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -8,7 +7,6 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 void main() async {
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
-  Database database = await DB.instance.database;
 
   group("Groupt of test of user endpoint", () {
     AddressesRepository localAddress = AddressesRepository(50);

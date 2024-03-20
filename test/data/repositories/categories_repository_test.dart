@@ -7,14 +7,14 @@ import 'package:result_dart/result_dart.dart';
 void main() {
   group("Test endpoints of categories", () {
     CateogriesRepository apiCategorires = CateogriesRepository();
-    late Category categoryTeste;
+    late Category categoryTest;
     test("Create category", () async {
       CategoryCreate categoryCreate = CategoryCreate(
           name: "new category",
           image:
               "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg");
       var response = await apiCategorires.createCategory(categoryCreate);
-      response.onSuccess((success) => categoryTeste = success);
+      response.onSuccess((success) => categoryTest = success);
       expect(response, isA<Success>());
     });
     test("Get All categories", () async {
@@ -23,18 +23,18 @@ void main() {
     });
 
     test("Get One categories", () async {
-      var response = await apiCategorires.getOneCategory(categoryTeste.id);
+      var response = await apiCategorires.getOneCategory(categoryTest.id);
       expect(response, isA<Success>());
     });
 
     test("Update category", () async {
-      categoryTeste.name = "nameTeste";
-      var response = await apiCategorires.updateCategory(categoryTeste);
+      categoryTest.name = "nameTeste";
+      var response = await apiCategorires.updateCategory(categoryTest);
       expect(response, isA<Success>());
     });
 
     test("Delete category", () async {
-      var response = await apiCategorires.deleteCategory(categoryTeste.id);
+      var response = await apiCategorires.deleteCategory(categoryTest.id);
       expect(response, isA<Success>());
     });
   });
