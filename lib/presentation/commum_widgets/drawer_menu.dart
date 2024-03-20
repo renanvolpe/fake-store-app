@@ -1,7 +1,7 @@
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -30,15 +30,15 @@ class DrawerMenu extends StatelessWidget {
               color: ColorsApp.kPrimary,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Volpe Store',
-                  style: Style.defaultLightTextStyle.copyWith(fontSize: 40),
+                Image.asset(
+                  width: 100,
+                  "assets/images/logo-color-cropped.png",
                 ),
                 15.sizeH,
                 Text(
-                  'Olá, ${profileInstance.user.name.value}',
+                  'Hello, ${profileInstance.user.name.value}',
                   style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
                 ),
               ],
@@ -46,32 +46,32 @@ class DrawerMenu extends StatelessWidget {
           ),
           ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('Início'),
+              title: Text('Home', style: Style.defaultTextStyle),
               onTap: () {
                 context.pushReplacement("/home");
               }),
           profileInstance.user.role.contains("admin")
               ? ListTile(
                   leading: const Icon(Icons.list),
-                  title: const Text('Meus produtos'),
+                  title: Text('My products', style: Style.defaultTextStyle),
                   onTap: () {
-                    context.push("/home/categoriesEdit");
+                    context.pushNamed("categories_edit");
                   },
                 )
               : ListTile(
                   leading: const Icon(Icons.list),
-                  title: const Text('Meus Pedidos'),
+                  title: Text('My Orders', style: Style.defaultTextStyle),
                   onTap: () => flushbarNotImplementedYet(context)),
           ListTile(
               leading: const Icon(Icons.account_circle_sharp),
-              title: const Text('Meu Perfil'),
+              title: Text('My Account', style: Style.defaultTextStyle),
               onTap: () => context.go("/account")),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Sair'),
+            title: Text('Logout', style: Style.defaultTextStyle),
             onTap: () async {
               scaffoldKey.currentState?.closeDrawer();
-              await GetIt.I.unregister<Profile>();
+              await GetIt.I.unregister<Profile>(); // not do that here, export functions
               context.go("/");
             },
           ),

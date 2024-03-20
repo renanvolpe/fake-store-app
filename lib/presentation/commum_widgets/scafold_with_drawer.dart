@@ -2,7 +2,7 @@ import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/drawer_menu.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

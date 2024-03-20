@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/core/default/textfield_decoration_default.dart';
@@ -7,7 +6,7 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,14 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               getUserController.add(GetUserStarted(state.token));
             }
             if (state is LoginFailure) {
-              // ignore: use_build_context_synchronously
-              Flushbar(
-                title: 'Erro de login',
-                backgroundColor: Colors.red,
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                message: 'Revise as infomações de login',
-                duration: const Duration(seconds: 2),
-              ).show(context);
+              await flushbarError(context, 'Error login', 'Review your data');
             }
           },
         ),
@@ -60,24 +52,12 @@ class _LoginPageState extends State<LoginPage> {
           bloc: getUserController,
           listener: (context, state) async {
             if (state is GetUserSuccess) {
-              await Flushbar(
-                title: 'Login realizado com sucesso',
-                backgroundColor: Colors.green,
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                message: 'Aprecia as funcionalidades do app',
-                duration: const Duration(milliseconds: 1500),
-              ).show(context);
+              await flushbarSuccess(context, 'Login success', 'Test other features in this app');
               // ignore: use_build_context_synchronously
               context.pushReplacement("/home");
             }
             if (state is GetUserFailure) {
-              Flushbar(
-                title: 'Erro de login',
-                backgroundColor: Colors.red,
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                message: 'Revise as infomações de login',
-                duration: const Duration(seconds: 2),
-              ).show(context);
+              await flushbarError(context, 'Error in login', 'review your address data');
             }
           },
         ),

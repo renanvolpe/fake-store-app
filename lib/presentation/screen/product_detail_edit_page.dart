@@ -6,7 +6,7 @@ import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_product/edit_poduct_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/flushbar_function_not_implemented.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

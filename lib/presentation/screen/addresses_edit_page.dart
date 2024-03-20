@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/data/models/address.dart';
@@ -6,6 +5,7 @@ import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/data/repositories/adresses_repository.dart';
 import 'package:fake_store_joao/logic/bloc/post_address/post_address_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/put_address/put_address_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/textfield_address.dart';
 import 'package:flutter/material.dart';
@@ -79,23 +79,11 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
                         bloc: postAddressBloc,
                         listener: (context, state) async {
                           if (state is PostAddressSuccess) {
-                            await Flushbar(
-                              title: 'Endereço criado com sucesso',
-                              backgroundColor: Colors.green,
-                              flushbarPosition: FlushbarPosition.BOTTOM,
-                              message: 'Aprecia as funcionalidades do app',
-                              duration: const Duration(milliseconds: 1500),
-                            ).show(context);
+                            await flushbarSuccess(context, 'Address created', 'Test other features in this app');
                             Navigator.pop(context);
                           }
                           if (state is PostAddressFailure) {
-                            await Flushbar(
-                              title: 'Erro ao adicionar endereço',
-                              backgroundColor: Colors.red,
-                              flushbarPosition: FlushbarPosition.BOTTOM,
-                              message: 'Revise as infomações de endereço',
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
+                            await flushbarError(context, 'Error in create address', 'review your address data');
                           }
                         },
                         builder: (context, statePost) {
@@ -103,23 +91,11 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
                             bloc: putAddressBloc,
                             listener: (context, state) async {
                               if (state is PutAddressSuccess) {
-                                await Flushbar(
-                                  title: 'Endereço atualizado com sucesso',
-                                  backgroundColor: Colors.green,
-                                  flushbarPosition: FlushbarPosition.BOTTOM,
-                                  message: 'Aprecia as funcionalidades do app',
-                                  duration: const Duration(milliseconds: 1500),
-                                ).show(context);
+                                await flushbarSuccess(context, 'Adresses updated', 'Test other features in this app');
                                 Navigator.pop(context);
                               }
                               if (state is PostAddressFailure) {
-                                await Flushbar(
-                                  title: 'Erro ao atualizar endereço',
-                                  backgroundColor: Colors.red,
-                                  flushbarPosition: FlushbarPosition.BOTTOM,
-                                  message: 'Revise as infomações de endereço',
-                                  duration: const Duration(seconds: 2),
-                                ).show(context);
+                                await flushbarError(context, 'Error in update address', 'review your address data');
                               }
                             },
                             builder: (context, statePut) {

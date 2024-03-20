@@ -60,7 +60,8 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () => context.push("/home/categoriesEdit/${listCategory[index].id}"),
+                                onTap: () => context.pushNamed("products_edit",
+                                    queryParameters: {"idCat": "${listCategory[index].id}"}),
                                 child: Ink(
                                   child: Card(
                                     shape: Border.all(width: 0),

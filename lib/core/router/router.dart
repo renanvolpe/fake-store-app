@@ -45,26 +45,32 @@ final router = GoRouter(
               ),
             ]),
       ]),
-      GoRoute(path: 'categoriesEdit', builder: (context, state) => const CategoriesEditPage(), routes: [
-        GoRoute(
-            path: ':idCat',
-            builder: (context, state) => ProductsPage(
-                  idCategory: int.parse(state.pathParameters["idCat"]!),
-                  isEdit: true,
-                ),
-            routes: [
-              GoRoute(
-                path: 'productsEdit/:productsId',
-                builder: (context, state) =>
-                    ProductDetailEditPage(idProd: int.parse(state.pathParameters['productsId']!)),
-              ),
-            ]),
-      ]),
+      GoRoute(
+          name: "categories_edit",
+          path: 'categories_edit',
+          builder: (context, state) => const CategoriesEditPage(),
+          routes: [
+            GoRoute(
+                name: "products_edit",
+                path: 'products_edit',
+                builder: (context, state) => ProductsPage(
+                      idCategory: int.parse(state.uri.queryParameters["idCat"]!),
+                      isEdit: true,
+                    ),
+                routes: [
+                  GoRoute(
+                    path: 'products_detail_edit',
+                    name: 'products_detail_edit',
+                    builder: (context, state) =>
+                        ProductDetailEditPage(idProd: int.parse(state.uri.queryParameters['products_id']!)),
+                  ),
+                ]),
+          ]),
       GoRoute(path: 'address', builder: (context, state) => const AddressesPage(), routes: [
         GoRoute(
           name: "address_edit",
           path: 'address_edit',
-          builder: (context, state) =>  AddressesEditPage(selectedAddress: state.extra as Address?),
+          builder: (context, state) => AddressesEditPage(selectedAddress: state.extra as Address?),
         ),
       ]),
     ]),

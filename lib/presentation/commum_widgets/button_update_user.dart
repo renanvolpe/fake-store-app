@@ -1,10 +1,10 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/data/models/profile/profile_controller.dart';
 import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:fake_store_joao/data/repositories/users_repository.dart';
 import 'package:fake_store_joao/logic/bloc/put_user/put_user_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,22 +28,10 @@ class ButtonUpdateUser extends StatelessWidget {
           bloc: putUserBloc,
           listener: (context, state) {
             if (state is PutUserSuccess) {
-              Flushbar(
-                title: 'Login atualizado com sucesso',
-                backgroundColor: Colors.green,
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                message: 'Aprecia as funcionalidades do app',
-                duration: const Duration(milliseconds: 1500),
-              ).show(context);
+              flushbarSuccess(context, "Profile Updated", 'Test other features in this app');
             }
             if (state is PutUserFailure) {
-              Flushbar(
-                title: 'Erro ao atualizar',
-                backgroundColor: Colors.red,
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                message: 'Revise seus dados',
-                duration: const Duration(seconds: 2),
-              ).show(context);
+              flushbarError(context, 'Error on update', 'Review your data');
             }
           },
           builder: (context, state) {
@@ -70,7 +58,7 @@ class ButtonUpdateUser extends StatelessWidget {
               },
               child: const ButtonBorderPrimary(
                 paddingH: 30,
-                text: "Atualizar dados",
+                text: "Update here",
               ),
             );
           },

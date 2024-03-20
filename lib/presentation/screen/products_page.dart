@@ -70,7 +70,8 @@ class _ProductsPageState extends State<ProductsPage> {
             child: InkWell(
               onTap: () async {
                 if (widget.isEdit) {
-                  await context.push("/home/categoriesEdit/${widget.idCategory}/productsEdit/${listProducts[i].id}");
+                  await context
+                      .pushNamed("products_detail_edit", queryParameters: {"products_id": "${listProducts[i].id}"});
                   getAllProductsController.add(GetAllProductsStarted(widget.idCategory));
                 } else {
                   context.pushNamed("product_detail", queryParameters: {"idProd": listProducts[i].id.toString()});

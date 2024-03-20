@@ -8,9 +8,11 @@ class TextFieldRegister extends StatefulWidget {
     super.key,
     this.field,
     this.text,
+    this.isBlock = false
   });
   final IValueObject? field;
   String? text;
+  final bool isBlock;
 
   @override
   State<TextFieldRegister> createState() => _TextFieldRegisterState();
@@ -22,6 +24,7 @@ class _TextFieldRegisterState extends State<TextFieldRegister> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.isBlock,
       initialValue: widget.field?.value,
       validator: widget.field?.validator,
       onChanged: widget.field?.setValue,

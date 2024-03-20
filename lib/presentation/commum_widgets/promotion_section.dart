@@ -22,7 +22,7 @@ class PromotionSection extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Promoções",
+          "For Sale",
           style: Style.defaultTextStyle.copyWith(fontSize: 24),
         ),
         15.sizeH,
