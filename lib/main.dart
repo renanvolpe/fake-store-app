@@ -4,8 +4,9 @@ import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main() async{
   SetupBinds.setupBindsAuth();
+  await SetupBinds.setupAuthData();
   runApp(const MyApp());
 }
 
