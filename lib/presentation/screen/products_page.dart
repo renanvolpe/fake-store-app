@@ -30,11 +30,13 @@ class _ProductsPageState extends State<ProductsPage> {
     super.initState();
   }
 
+  String _getTitle() => widget.isEdit ? "Select product to edit" : "Products list";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kBackground,
-      appBar: AppbarDefault(context, widget.nameCat ?? "Lista de produtos"),
+      appBar: AppbarDefault(context, _getTitle()),
       body: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
         bloc: getAllProductsController,
         builder: (context, state) {
@@ -103,7 +105,7 @@ class _ProductsPageState extends State<ProductsPage> {
                           style: Style.defaultTextStyle.copyWith(fontSize: 18),
                         ),
                         Text(
-                          "6 produtos em estoque",
+                          "5 products in stock",
                           style: Style.defaultTextStyle.copyWith(fontSize: 14),
                         )
                       ],

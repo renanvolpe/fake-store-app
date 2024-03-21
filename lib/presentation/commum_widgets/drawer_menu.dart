@@ -55,7 +55,7 @@ class DrawerMenu extends StatelessWidget {
                   leading: const Icon(Icons.list),
                   title: Text('My products', style: Style.defaultTextStyle),
                   onTap: () {
-                    context.pushNamed("categories_edit");
+                    context.pushNamed("categories");
                   },
                 )
               : ListTile(

@@ -1,7 +1,6 @@
 import 'package:fake_store_joao/data/models/address.dart';
 import 'package:fake_store_joao/presentation/screen/addresses_edit_page.dart';
 import 'package:fake_store_joao/presentation/screen/addresses_page.dart';
-import 'package:fake_store_joao/presentation/screen/categories_edit_page.dart';
 import 'package:fake_store_joao/presentation/screen/categories_page.dart';
 import 'package:fake_store_joao/presentation/screen/home_page.dart';
 import 'package:fake_store_joao/presentation/screen/loading_page.dart';
@@ -26,16 +25,19 @@ final router = GoRouter(
       builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
+      name: "register",
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
     GoRoute(
       name: "loading",
       path: '/loading',
-      builder: (context, state) =>  LoadingPage(token: state.uri.queryParameters["token"]!,),
+      builder: (context, state) => LoadingPage(
+        token: state.uri.queryParameters["token"]!,
+      ),
     ),
     GoRoute(path: '/home', builder: (context, state) => const HomePage(), routes: [
-      GoRoute(path: 'categories', builder: (context, state) => const CategoriesPage(), routes: [
+      GoRoute(name: "categories", path: 'categories', builder: (context, state) => const CategoriesPage(), routes: [
         GoRoute(
             name: "products",
             path: 'products',
@@ -50,28 +52,22 @@ final router = GoRouter(
                 builder: (context, state) => ProductDetailPage(idProd: int.parse(state.uri.queryParameters["idProd"]!)),
               ),
             ]),
+        GoRoute(
+            name: "products_edit",
+            path: 'products_edit',
+            builder: (context, state) => ProductsPage(
+                  idCategory: int.parse(state.uri.queryParameters["idCat"]!),
+                  isEdit: true,
+                ),
+            routes: [
+              GoRoute(
+                path: 'products_detail_edit',
+                name: 'products_detail_edit',
+                builder: (context, state) =>
+                    ProductDetailEditPage(idProd: int.parse(state.uri.queryParameters['products_id']!)),
+              ),
+            ]),
       ]),
-      GoRoute(
-          name: "categories_edit",
-          path: 'categories_edit',
-          builder: (context, state) => const CategoriesEditPage(),
-          routes: [
-            GoRoute(
-                name: "products_edit",
-                path: 'products_edit',
-                builder: (context, state) => ProductsPage(
-                      idCategory: int.parse(state.uri.queryParameters["idCat"]!),
-                      isEdit: true,
-                    ),
-                routes: [
-                  GoRoute(
-                    path: 'products_detail_edit',
-                    name: 'products_detail_edit',
-                    builder: (context, state) =>
-                        ProductDetailEditPage(idProd: int.parse(state.uri.queryParameters['products_id']!)),
-                  ),
-                ]),
-          ]),
       GoRoute(path: 'address', builder: (context, state) => const AddressesPage(), routes: [
         GoRoute(
           name: "address_edit",

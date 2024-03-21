@@ -6,8 +6,8 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/chose_size.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,7 +81,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style: Style.defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           15.sizeH,
-                          Text("Features: Muito Conforto, DryFit, Esportiva",
+                          Text("Features: Very Comfortable, DryFit, Sports",
                               style: Style.defaultTextStyle.copyWith(fontSize: 16)),
                           15.sizeH,
                           Text(

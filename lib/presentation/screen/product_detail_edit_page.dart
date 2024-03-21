@@ -1,12 +1,10 @@
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
-import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
 import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/edit_product/edit_poduct_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_product/get_product_bloc.dart';
-import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +37,7 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kWhite,
-      appBar: AppbarDefault(context, "Edite um produto"),
+      appBar: AppbarDefault(context, "Edit this product"),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocConsumer<GetProductBloc, GetProductState>(
           listener: (context, state) {
@@ -120,26 +118,26 @@ class _ProductDetailEditPageState extends State<ProductDetailEditPage> {
                               )
                             ],
                           ),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: InkWell(
-                                onTap: () {
-                                  flushbarNotImplementedYet(context);
-                                },
-                                child: Ink(
-                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-                                  color: Colors.lightBlue,
-                                  child: Center(
-                                      child: Text(
-                                    "Comprar",
-                                    style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
-                                  )),
-                                ),
-                              ))
-                            ],
-                          ),
+                          // const Spacer(),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //         child: InkWell(
+                          //       onTap: () {
+                          //         flushbarNotImplementedYet(context);
+                          //       },
+                          //       child: Ink(
+                          //         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                          //         color: Colors.lightBlue,
+                          //         child: Center(
+                          //             child: Text(
+                          //           "Comprar",
+                          //           style: Style.defaultLightTextStyle.copyWith(fontSize: 22),
+                          //         )),
+                          //       ),
+                          //     ))
+                          //   ],
+                          // ),
                           10.sizeH,
                         ],
                       ),
