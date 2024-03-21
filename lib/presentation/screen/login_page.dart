@@ -40,24 +40,10 @@ class _LoginPageState extends State<LoginPage> {
           bloc: loginController,
           listener: (context, state) async {
             if (state is LoginSuccess) {
-              //it calls the get it to save Users data
-              getUserController.add(GetUserStarted(state.token));
+              context.pushReplacementNamed("loading", queryParameters: {"token": state.token});
             }
             if (state is LoginFailure) {
               await flushbarError(context, 'Error login', 'Review your data');
-            }
-          },
-        ),
-        BlocListener<GetUserBloc, GetUserState>(
-          bloc: getUserController,
-          listener: (context, state) async {
-            if (state is GetUserSuccess) {
-              await flushbarSuccess(context, 'Login success', 'Test other features in this app');
-              // ignore: use_build_context_synchronously
-              context.pushReplacement("/home");
-            }
-            if (state is GetUserFailure) {
-              await flushbarError(context, 'Error in login', 'review your address data');
             }
           },
         ),

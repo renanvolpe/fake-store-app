@@ -4,6 +4,7 @@ import 'package:fake_store_joao/presentation/screen/addresses_page.dart';
 import 'package:fake_store_joao/presentation/screen/categories_edit_page.dart';
 import 'package:fake_store_joao/presentation/screen/categories_page.dart';
 import 'package:fake_store_joao/presentation/screen/home_page.dart';
+import 'package:fake_store_joao/presentation/screen/loading_page.dart';
 import 'package:fake_store_joao/presentation/screen/login_page.dart';
 import 'package:fake_store_joao/presentation/screen/my_account_page.dart';
 import 'package:fake_store_joao/presentation/screen/product_detail_edit_page.dart';
@@ -27,6 +28,11 @@ final router = GoRouter(
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      name: "loading",
+      path: '/loading',
+      builder: (context, state) =>  LoadingPage(token: state.uri.queryParameters["token"]!,),
     ),
     GoRoute(path: '/home', builder: (context, state) => const HomePage(), routes: [
       GoRoute(path: 'categories', builder: (context, state) => const CategoriesPage(), routes: [
