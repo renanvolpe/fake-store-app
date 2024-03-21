@@ -3,9 +3,9 @@ import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/core/default/textfield_decoration_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
-import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   late GetUserBloc getUserController;
   @override
   void initState() {
-    loginController = LoginBloc(AuthenticationRepository());
-    getUserController = GetUserBloc(AuthenticationRepository());
+    loginController = binds.get<LoginBloc>();
+    getUserController = binds.get<GetUserBloc>();
     super.initState();
   }
 

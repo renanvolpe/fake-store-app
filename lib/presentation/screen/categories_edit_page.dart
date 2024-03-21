@@ -1,10 +1,7 @@
 import 'package:fake_store_joao/core/default/appbar_default.dart';
-import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/data/models/category.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
-import 'package:fake_store_joao/data/repositories/categories_repository.dart';
-import 'package:fake_store_joao/logic/bloc/edit_category/edit_category_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_categories/get_all_categories_bloc.dart';
 import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
@@ -12,7 +9,6 @@ import 'package:fake_store_joao/presentation/screen/categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 
 class CategoriesEditPage extends StatefulWidget {
   const CategoriesEditPage({super.key});
@@ -81,4 +77,3 @@ class _CategoriesEditPageState extends State<CategoriesEditPage> {
     );
   }
 }
-

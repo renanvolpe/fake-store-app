@@ -2,8 +2,8 @@ import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
 import 'package:fake_store_joao/data/models/profile/profile_controller.dart';
 import 'package:fake_store_joao/data/models/profile/user/user.dart';
-import 'package:fake_store_joao/data/repositories/users_repository.dart';
 import 'package:fake_store_joao/logic/bloc/put_user/put_user_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ class ButtonUpdateUser extends StatelessWidget {
 
   final ProfileController controller;
   final User user;
-  final PutUserBloc putUserBloc = PutUserBloc(UserRepository());
+  final PutUserBloc putUserBloc = binds.get<PutUserBloc>();
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,14 @@
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/data/models/address.dart';
-import 'package:fake_store_joao/data/models/profile/profile.dart';
-import 'package:fake_store_joao/data/repositories/adresses_repository.dart';
 import 'package:fake_store_joao/logic/bloc/post_address/post_address_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/put_address/put_address_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/textfield_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 class AddressesEditPage extends StatefulWidget {
   const AddressesEditPage({super.key, this.selectedAddress});
@@ -33,11 +31,8 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
     super.initState();
     address = widget.selectedAddress ?? Address.empty();
 
-    int userId = GetIt.I.get<Profile>().user.id;
-    var repository = AddressesRepository(userId);
-
-    putAddressBloc = PutAddressBloc(repository);
-    postAddressBloc = PostAddressBloc(repository);
+    putAddressBloc = binds.get<PutAddressBloc>();
+    postAddressBloc = binds.get<PostAddressBloc>();
   }
 
   bool _isToAdd() => widget.selectedAddress == null;

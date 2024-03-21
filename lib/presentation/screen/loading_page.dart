@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fake_store_joao/core/themes/colors_app.dart';
-import 'package:fake_store_joao/data/repositories/authentication_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ class LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GetUserBloc getUserController = GetUserBloc(AuthenticationRepository());
+    final GetUserBloc getUserController = binds.get<GetUserBloc>();
     getUserController.add(GetUserStarted(token));
     return BlocListener<GetUserBloc, GetUserState>(
       bloc: getUserController,
