@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/core/default/circular_progress_indicator.dart';
@@ -8,6 +7,7 @@ import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/user_create.dart';
 import 'package:fake_store_joao/data/repositories/users_repository.dart';
 import 'package:fake_store_joao/logic/bloc/crate_user/create_user_bloc.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,22 +38,10 @@ class _RegisterPageState extends State<RegisterPage> {
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           Navigator.pop(context);
-          Flushbar(
-            title: 'Cadastro criado com sucesso',
-            backgroundColor: Colors.green,
-            flushbarPosition: FlushbarPosition.TOP,
-            message: 'Faça login para continuar',
-            duration: const Duration(seconds: 3),
-          ).show(context);
+          flushbarSuccess(context, 'Profile updated', 'Test other features in this app');
         }
         if (state is CreateUserFailure) {
-          Flushbar(
-            title: 'Erro ao criar conta',
-            backgroundColor: Colors.red,
-            flushbarPosition: FlushbarPosition.TOP,
-            message: state.errorMessage,
-            duration: const Duration(seconds: 5),
-          ).show(context);
+          flushbarError(context, 'Error in register', 'review your profile data');
         }
       },
       child: Scaffold(

@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:fake_store_joao/core/default/appbar_default.dart';
 import 'package:fake_store_joao/core/default/button_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
@@ -8,6 +7,7 @@ import 'package:fake_store_joao/logic/bloc/delete_address/delete_address_bloc.da
 import 'package:fake_store_joao/logic/bloc/get_list_address/get_list_addres_bloc.dart';
 import 'package:fake_store_joao/logic/cubit/address_select/address_select_cubit.dart';
 import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
+import 'package:fake_store_joao/presentation/commum_widgets/app_flushbars.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,13 +47,9 @@ class _AddressesPageState extends State<AddressesPage> {
             bloc: deleteAddressBloc,
             listener: (context, stateDelete) {
               if (stateDelete is DeleteAddressSuccess) {
-                Flushbar(
-                  title: 'Endereço removido com sucesso',
-                  backgroundColor: Colors.green,
-                  flushbarPosition: FlushbarPosition.BOTTOM,
-                  message: 'Aprecia as funcionalidades do app',
-                  duration: const Duration(milliseconds: 1500),
-                ).show(context);
+                  flushbarSuccess(
+                                context, 'Adresses removed', 'Test other features in this app');
+               
                 getListAddressBloc.add(GetListAddressStarted());
               }
             },

@@ -58,10 +58,12 @@ class _MyAccountPageState extends State<MyAccountPage> {
                   ),
                   15.sizeH,
                   TextFieldRegister(
+                    isBlock: true,
                     field: user.email,
                   ),
                   15.sizeH,
                   TextFieldRegister(
+                    isBlock: true,
                     field: user.password,
                   ),
                   50.sizeH,

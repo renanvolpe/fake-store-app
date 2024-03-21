@@ -35,7 +35,7 @@ class GetAllProductsBloc extends Bloc<GetAllProductsEvent, GetAllProductsState> 
     }
 
     //reverse list to get lastets prods registered
-    listProd = listProd.reversed.toList();
+    // listProd = listProd.reversed.toList();
 
     int numImagesInHome = 9;
     List<Product> newListProd = [];

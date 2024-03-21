@@ -23,7 +23,7 @@ class RecentHighlightsSection extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(vertical: 15),
           child: Text(
-            "Destaques recentes",
+            "Recent highlight",
             style: Style.defaultTextStyle.copyWith(fontSize: 24),
           ),
         ),

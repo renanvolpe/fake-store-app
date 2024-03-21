@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:fake_store_joao/core/default/empty_or_error_state_default.dart';
-import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_products/get_all_products_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/home_page_shimmer.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/promotion_section.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/recent_highlight_section.dart';
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     categoryIndex = random.nextInt(5);
-    getAllProductsController = GetAllProductsBloc(ProductRepository());
+    getAllProductsController = binds.get<GetAllProductsBloc>();
     getAllProductsController.add(GetAllProductsStarted());
     super.initState();
   }

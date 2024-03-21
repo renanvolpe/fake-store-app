@@ -3,8 +3,8 @@ import 'package:fake_store_joao/core/default/image_default.dart';
 import 'package:fake_store_joao/core/themes/colors_app.dart';
 import 'package:fake_store_joao/core/themes/style.dart';
 import 'package:fake_store_joao/data/models/product.dart';
-import 'package:fake_store_joao/data/repositories/products_repository.dart';
 import 'package:fake_store_joao/logic/bloc/get_all_products/get_all_products_bloc.dart';
+import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/products_page_shimmer.dart';
 import 'package:fake_store_joao/presentation/commum_widgets/resumed_sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +25,18 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   void initState() {
-    getAllProductsController = GetAllProductsBloc(ProductRepository());
+    getAllProductsController = binds.get<GetAllProductsBloc>();
     getAllProductsController.add(GetAllProductsStarted(widget.idCategory));
     super.initState();
   }
+
+  String _getTitle() => widget.isEdit ? "Select product to edit" : "Products list";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.kBackground,
-      appBar: AppbarDefault(context, widget.nameCat ?? "Lista de produtos"),
+      appBar: AppbarDefault(context, _getTitle()),
       body: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
         bloc: getAllProductsController,
         builder: (context, state) {
@@ -70,7 +72,8 @@ class _ProductsPageState extends State<ProductsPage> {
             child: InkWell(
               onTap: () async {
                 if (widget.isEdit) {
-                  await context.push("/home/categoriesEdit/${widget.idCategory}/productsEdit/${listProducts[i].id}");
+                  await context
+                      .pushNamed("products_detail_edit", queryParameters: {"products_id": "${listProducts[i].id}"});
                   getAllProductsController.add(GetAllProductsStarted(widget.idCategory));
                 } else {
                   context.pushNamed("product_detail", queryParameters: {"idProd": listProducts[i].id.toString()});
@@ -102,7 +105,7 @@ class _ProductsPageState extends State<ProductsPage> {
                           style: Style.defaultTextStyle.copyWith(fontSize: 18),
                         ),
                         Text(
-                          "6 produtos em estoque",
+                          "5 products in stock",
                           style: Style.defaultTextStyle.copyWith(fontSize: 14),
                         )
                       ],
