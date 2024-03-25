@@ -1,3 +1,4 @@
+import 'package:fake_store_joao/data/http/http_connection.dart';
 import 'package:fake_store_joao/data/models/profile/profile.dart';
 import 'package:fake_store_joao/data/models/user_create.dart';
 import 'package:fake_store_joao/data/repositories/adresses_repository.dart';
@@ -14,6 +15,7 @@ import 'package:fake_store_joao/logic/bloc/get_user/get_user_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/login/login_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/post_address/post_address_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/put_address/put_address_bloc.dart';
+import 'package:fake_store_joao/logic/bloc/put_user/put_user_bloc.dart';
 import 'package:fake_store_joao/logic/cubit/address_select/address_select_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,9 +24,15 @@ final binds = GetIt.I;
 class SetupBinds {
   static void setupBindsAuth() {
     //BINDS BEFORE HOME
-      binds.registerSingleton<AuthenticationRepository>(AuthenticationRepository());
+
+     binds.registerSingleton(HttpClients());
+      binds.registerSingleton<AuthenticationRepository>(AuthenticationRepository(binds.get<HttpClients>()));
       binds.registerSingleton<GetUserBloc>(GetUserBloc(binds.get<AuthenticationRepository>()));
       binds.registerSingleton<LoginBloc>(LoginBloc(binds.get<AuthenticationRepository>()));
+
+      binds.registerSingleton<UserRepository>(UserRepository());
+      binds.registerSingleton<PutUserBloc>(PutUserBloc(binds.get<UserRepository>()));
+      //PutUserBloc 
   }
 
   static void setupBindsHome(Profile profile) {

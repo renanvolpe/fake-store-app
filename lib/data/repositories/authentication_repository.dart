@@ -9,7 +9,9 @@ abstract class AuthenticationRequest {
 }
 
 class AuthenticationRepository implements AuthenticationRequest {
-  HttpClients connect = HttpClients();
+  final HttpClients _connect;
+  AuthenticationRepository(connect) : _connect = connect;
+  
   @override
   Future<Result<String, String>> loginUser(String email, String password) async {
     Map<String, dynamic> body = {
@@ -17,7 +19,7 @@ class AuthenticationRepository implements AuthenticationRequest {
       "password": password,
     };
 
-    var response = await connect.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: body);
+    var response = await _connect.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: body);
 
     return response.fold((success) {
       return Success(success["access_token"]);
@@ -26,7 +28,7 @@ class AuthenticationRepository implements AuthenticationRequest {
 
   @override
   Future<Result<User, String>> getProfile(String token) async {
-    var response = await connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", token: token);
+    var response = await _connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", token: token);
 
     return response.fold((success) {
       var profile = User.fromMap(success);

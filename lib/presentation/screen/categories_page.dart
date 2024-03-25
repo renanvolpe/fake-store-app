@@ -205,7 +205,7 @@ class SectionAndButtonCategory extends StatelessWidget {
                                               separatorBuilder: (context, index) => 15.sizeW,
                                               itemBuilder: (context, index) => Container(
                                                 width: 70,
-                                                color: Colors.lightBlue,
+                                                color: ColorsApp.kPrimary,
                                                 child: const SizedBox(
                                                     width: 10,
                                                     height: 10,

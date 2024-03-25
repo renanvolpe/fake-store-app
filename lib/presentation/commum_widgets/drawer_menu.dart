@@ -65,7 +65,7 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
               leading: const Icon(Icons.account_circle_sharp),
               title: Text('My Account', style: Style.defaultTextStyle),
-              onTap: () => context.go("/account")),
+              onTap: () => context.goNamed("account")),
           ListTile(
             leading: const Icon(Icons.logout),
             title: Text('Logout', style: Style.defaultTextStyle),

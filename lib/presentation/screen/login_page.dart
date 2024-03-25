@@ -117,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                                 return ButtonBorderPrimary(
+                                    key: Key("Login button"),
                                     onTap: () => loginController
                                         .add(LoginStarted(emailController.text, passwordController.text)),
                                     text: "Sign in");

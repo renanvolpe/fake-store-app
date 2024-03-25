@@ -77,6 +77,7 @@ final router = GoRouter(
       ]),
     ]),
     GoRoute(
+      name: 'account',
       path: '/account',
       builder: (context, state) => const MyAccountPage(),
     ),
