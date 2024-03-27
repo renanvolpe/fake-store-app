@@ -7,33 +7,39 @@ import 'package:fake_store_joao/logic/get_it/init_get_it.dart';
 import 'package:fake_store_joao/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:result_dart/result_dart.dart';
+import 'package:http/http.dart' as http;
 
-class MockHttpClients extends Mock implements HttpClients {
-  static String authority = Endpoints.baseUrl;
-  static String v1 = Endpoints.v1;
-}
+import 'login_page_test.mocks.dart';
 
-class MockAuthenticationRepository extends Mock implements AuthenticationRepository {
-  final HttpClients httpClient;
+class MockHttpClient extends Mock implements HttpClientsTest {}
 
-  MockAuthenticationRepository(this.httpClient);
-
-  
-}
-
+@GenerateMocks([http.Client])
 void main() {
   testWidgets('Verify that the add user button adds user to database', (WidgetTester tester) async {
-    final mockHttpClients = MockHttpClients();
-    final mockRepository = MockAuthenticationRepository(mockHttpClients);
+    final mockHttpClients = HttpClientsTest(MockClient());
+    final mockRepository = AuthenticationRepository(mockHttpClients);
 
-     when(mockRepository.loginUser("joao@joao.com", "1234"))
-        .thenAnswer((_) async => await Future(() => const Success("TokenMock")));
+    Map<String, dynamic> body = {
+      "email": "joao@joao.com",
+      "password": "1234",
+    };
+
+    
+    // need to setup to reutnr when to others methods
+
+
+    when(mockHttpClients.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: body)).thenAnswer((_) async {
+      print(_);
+      return const Success("success");
+    });
 
     binds.registerSingleton<LoginBloc>(LoginBloc(mockRepository));
     binds.registerSingleton<GetUserBloc>(GetUserBloc(mockRepository));
-    // binds.get<GetUserBloc>();
+
+    binds.get<GetUserBloc>();
 
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
@@ -51,40 +57,50 @@ void main() {
   });
 }
 
+// import 'package:flutter_test/flutter_test.dart';
+// import 'package:mockito/mockito.dart';
+// import 'package:your_package_name/authentication_repository.dart'; // Import your classes
+// import 'package:your_package_name/main.dart'; // Import your main.dart file or any file where MyApp is defined
+
 // void mains() {
 //   testWidgets('Verify that the add user button adds user to database', (WidgetTester tester) async {
-//     // Arrange
-//     final mockHttpClients = MockHttpClients();
-//     final mockRepository = MockAuthenticationRepository(mockHttpClients); // Pass mock HttpClients to mock repository
-//     // Mocking the loginUser method properly
-//     when(mockRepository.loginUser("any", "any")).thenAnswer((_) async => Success("TokenMock"));
-//     final mockLoginBloc = LoginBloc(mockRepository); // Create a mock instance of LoginBloc
-//     await tester.pumpWidget(MyApp(loginBloc: mockLoginBloc)); // Pass the bloc instance to your widget
+//     // Create mock HTTP client
+//     final mockHttpClient = MockHttpClient();
+
+//     // Define test data
+//     final email = 'joao@joao.com';
+//     final password = '1234';
+//     final response = Success('success');
+
+//     // Mock the behavior of httpPost
+//     when(mockHttpClient.httpPost(endpoint: anyNamed('endpoint'), body: anyNamed('body')))
+//         .thenAnswer((_) async => response);
+
+//     // Build the widget
+//     await tester.pumpWidget(MyApp(httpClient: mockHttpClient));
+
+//     // Find text fields and enter values
+//     final emailField = find.byKey(const Key('email_field'));
+//     expect(emailField, findsOneWidget);
+//     await tester.enterText(emailField, email);
+
+//     final passwordField = find.byKey(const Key('password_field'));
+//     expect(passwordField, findsOneWidget);
+//     await tester.enterText(passwordField, password);
+
+//     // Find and tap the login button
+//     final loginButton = find.byKey(const Key('login_button'));
+//     expect(loginButton, findsOneWidget);
+//     await tester.tap(loginButton);
+//     await tester.pump();
+
+//     // Wait for the UI to update
 //     await tester.pumpAndSettle();
 
-//     // Your test implementation
-//   });
-// }
-
-// class MockHttpClients extends Mock implements HttpClients {} // Mock HttpClients
-
-// class MockAuthenticationRepository extends Mock implements AuthenticationRepository {
-//   final HttpClients httpClient; // HttpClients instance in your mock repository
-
-//   MockAuthenticationRepository(this.httpClient); // Constructor to pass HttpClients
-// }
-
-// void main() {
-//   testWidgets('Verify that the add user button adds user to database', (WidgetTester tester) async {
-//     // Arrange
-//     final mockHttpClients = MockHttpClients();
-//     final mockRepository = MockAuthenticationRepository(mockHttpClients); // Pass mock HttpClients to mock repository
-//     // Mocking the loginUser method properly
-//     when(mockRepository.loginUser(any, any)).thenAnswer((_) async => const Success("TokenMock"));
-//     final mockLoginBloc = LoginBloc(mockRepository); // Create a mock instance of LoginBloc
-//     await tester.pumpWidget(MyApp(loginBloc: mockLoginBloc)); // Pass the bloc instance to your widget
-//     await tester.pumpAndSettle();
-
-//     // Your test implementation
+//     // Verify that the user is added to the database
+//     verify(mockHttpClient.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: {
+//       'email': email,
+//       'password': password,
+//     })).called(1);
 //   });
 // }

@@ -18,6 +18,7 @@ import 'package:fake_store_joao/logic/bloc/put_address/put_address_bloc.dart';
 import 'package:fake_store_joao/logic/bloc/put_user/put_user_bloc.dart';
 import 'package:fake_store_joao/logic/cubit/address_select/address_select_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 
 final binds = GetIt.I;
 
@@ -25,8 +26,8 @@ class SetupBinds {
   static void setupBindsAuth() {
     //BINDS BEFORE HOME
 
-     binds.registerSingleton(HttpClients());
-      binds.registerSingleton<AuthenticationRepository>(AuthenticationRepository(binds.get<HttpClients>()));
+     binds.registerSingleton(HttpClientsTest(Client ()));
+      binds.registerSingleton<AuthenticationRepository>(AuthenticationRepository(binds.get<HttpClientsTest>()));
       binds.registerSingleton<GetUserBloc>(GetUserBloc(binds.get<AuthenticationRepository>()));
       binds.registerSingleton<LoginBloc>(LoginBloc(binds.get<AuthenticationRepository>()));
 

@@ -4,13 +4,13 @@ import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract class AuthenticationRequest {
-  loginUser(String email, String password);
+  Future<Result<String, String>> loginUser(String email, String password);
   getProfile(String token);
 }
 
 class AuthenticationRepository implements AuthenticationRequest {
-  final HttpClients _connect;
-  AuthenticationRepository(connect) : _connect = connect;
+  final HttpClientsTest _connect;
+  AuthenticationRepository(this._connect);
   
   @override
   Future<Result<String, String>> loginUser(String email, String password) async {
