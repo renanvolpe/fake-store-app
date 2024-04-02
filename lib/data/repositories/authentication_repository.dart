@@ -9,7 +9,7 @@ abstract class AuthenticationRequest {
 }
 
 class AuthenticationRepository implements AuthenticationRequest {
-  final HttpClientsTest _connect;
+  final HttpService _connect;
   AuthenticationRepository(this._connect);
   
   @override
@@ -28,7 +28,7 @@ class AuthenticationRepository implements AuthenticationRequest {
 
   @override
   Future<Result<User, String>> getProfile(String token) async {
-    var response = await _connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", token: token);
+    var response = await _connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", );
 
     return response.fold((success) {
       var profile = User.fromMap(success);

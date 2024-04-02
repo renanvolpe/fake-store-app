@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 // class MockHttpClients extends Mock implements HttpClients {}
 void main() {
   group("Groupt of test of user endpoint", () {
-    AuthenticationRepository apiAuth = AuthenticationRepository(HttpClientsTest(http.Client()));
+    AuthenticationRepository apiAuth = AuthenticationRepository(HttpClients());
     late String tokenUser;
     test("login user", () async {
       var response = await apiAuth.loginUser("joao@joao.com", "1234");
@@ -15,6 +15,7 @@ void main() {
 
       expect(response, isA<Success>());
     });
+    
 
     test("get user s profile ", () async {
       var response = await apiAuth.getProfile(tokenUser);

@@ -17,6 +17,8 @@ class HttpClients implements HttpService {
   static String authority = Endpoints.baseUrl;
   static String v1 = Endpoints.v1;
 
+  final Client client = Client();
+
   @override
   Future<Result<dynamic, String>> httpGet(
       {required String endpoint, Map<String, String>? params, String? token}) async {
@@ -24,7 +26,7 @@ class HttpClients implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint, params);
 
-    Response response = await get(uri, headers: NetWorkUtils.getHttpHeaders(token));
+    Response response = await client.get(uri, headers: NetWorkUtils.getHttpHeaders(token));
     var mapDecoded = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
@@ -44,7 +46,8 @@ class HttpClients implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await post(uri, headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
+    Response response = await client.post(uri, headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
+    print(response.body);
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -63,7 +66,8 @@ class HttpClients implements HttpService {
 
     Uri uri = Uri.https(authority, "$v1$endpoint$id");
 
-    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token));
+    Response response = await client.delete(uri, headers: NetWorkUtils.getHttpHeaders(token));
+
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -81,7 +85,7 @@ class HttpClients implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: jsonEncode(body));
+    Response response = await client.patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -99,7 +103,7 @@ class HttpClients implements HttpService {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: jsonEncode(body));
+    Response response = await client.put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -113,7 +117,7 @@ class HttpClients implements HttpService {
 }
 
 class HttpClientsTest implements HttpClients {
-  Client httpTeste;
+  final Client httpTeste;
   HttpClientsTest(this.httpTeste);
 
   static String authority = Endpoints.baseUrl;
@@ -127,6 +131,7 @@ class HttpClientsTest implements HttpClients {
     Uri uri = Uri.https(authority, v1 + endpoint, params);
 
     Response response = await httpTeste.get(uri, headers: NetWorkUtils.getHttpHeaders(token));
+    print(response.body);
     var mapDecoded = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
@@ -146,7 +151,7 @@ class HttpClientsTest implements HttpClients {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await post(uri, headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
+    Response response = await httpTeste.post(uri, headers: NetWorkUtils.postHttpHeaders(), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -165,7 +170,7 @@ class HttpClientsTest implements HttpClients {
 
     Uri uri = Uri.https(authority, "$v1$endpoint$id");
 
-    Response response = await delete(uri, headers: NetWorkUtils.getHttpHeaders(token));
+    Response response = await httpTeste.delete(uri, headers: NetWorkUtils.getHttpHeaders(token));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -183,7 +188,7 @@ class HttpClientsTest implements HttpClients {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: jsonEncode(body));
+    Response response = await httpTeste.patch(uri, headers: NetWorkUtils.getHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -201,7 +206,7 @@ class HttpClientsTest implements HttpClients {
 
     Uri uri = Uri.https(authority, v1 + endpoint);
 
-    Response response = await put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: jsonEncode(body));
+    Response response = await httpTeste.put(uri, headers: NetWorkUtils.postHttpHeaders(token), body: jsonEncode(body));
     var mapDecoded = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetWorkUtils.printLoggSuccess(response);
@@ -212,4 +217,8 @@ class HttpClientsTest implements HttpClients {
       return Failure(errorMessage);
     }
   }
+  
+  @override
+  // TODO: implement client
+  Client get client => throw UnimplementedError();
 }

@@ -1,3 +1,6 @@
+import 'dart:core';
+
+import 'package:fake_store_joao/core/constants/endpoints.dart';
 import 'package:fake_store_joao/core/observer/logger.dart';
 import 'package:http/http.dart';
 
@@ -26,10 +29,12 @@ class NetWorkUtils {
     return headers;
   }
 
+  static Uri getUri(String endpoint)=> Uri.https(Endpoints.baseUrl, Endpoints.v1 + endpoint);
+
   static printLoggSuccess(Response response) => Logg.consoleShow(
-      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}");
+      "SUCCESS \nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \nBODY :: ${response.body}");
   static printLoggError(Response response, String errorMessage) => Logg.error(
-      "ENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)}  \nErrorMessage :: $errorMessage");
+      "\nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \nBODY :: ${response.body}  \nErrorMessage :: $errorMessage ");
 }
 
 class ResponseCode {

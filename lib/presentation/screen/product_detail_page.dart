@@ -33,7 +33,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: ColorsApp.kWhite,
-      appBar: AppbarDefaultJustBackBtn(context),
+      // appBar: AppbarDefaultJustBackBtn(context),
       body: LayoutBuilder(
         builder: (_, constraints) => BlocBuilder<GetProductBloc, GetProductState>(
           bloc: getProductController,
