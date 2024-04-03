@@ -17,6 +17,10 @@ class ProductCreate {
     required this.images,
   });
 
+  factory ProductCreate.toTest(int idCategory) =>  ProductCreate(title: "new Product", price: 100, description: "description here", categodyId: idCategory, images: [
+        "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg"
+      ]);
+
   ProductCreate copyWith({
     String? title,
     int? price,

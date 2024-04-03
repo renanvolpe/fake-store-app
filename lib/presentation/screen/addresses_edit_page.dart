@@ -74,11 +74,11 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
                         bloc: postAddressBloc,
                         listener: (context, state) async {
                           if (state is PostAddressSuccess) {
-                            await flushbarSuccess(context, 'Address created', 'Test other features in this app');
                             Navigator.pop(context);
+                            flushbarSuccess(context, 'Address created', 'Test other features in this app');
                           }
                           if (state is PostAddressFailure) {
-                            await flushbarError(context, 'Error in create address', 'review your address data');
+                            flushbarError(context, 'Error in create address', 'review your address data');
                           }
                         },
                         builder: (context, statePost) {
@@ -86,11 +86,11 @@ class _AddressesEditPageState extends State<AddressesEditPage> {
                             bloc: putAddressBloc,
                             listener: (context, state) async {
                               if (state is PutAddressSuccess) {
-                                await flushbarSuccess(context, 'Adresses updated', 'Test other features in this app');
                                 Navigator.pop(context);
+                                flushbarSuccess(context, 'Adresses updated', 'Test other features in this app');
                               }
                               if (state is PostAddressFailure) {
-                                await flushbarError(context, 'Error in update address', 'review your address data');
+                                flushbarError(context, 'Error in update address', 'review your address data');
                               }
                             },
                             builder: (context, statePut) {

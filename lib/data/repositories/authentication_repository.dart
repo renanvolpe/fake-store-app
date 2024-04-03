@@ -4,12 +4,14 @@ import 'package:fake_store_joao/data/models/profile/user/user.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract class AuthenticationRequest {
-  loginUser(String email, String password);
+  Future<Result<String, String>> loginUser(String email, String password);
   getProfile(String token);
 }
 
 class AuthenticationRepository implements AuthenticationRequest {
-  HttpClients connect = HttpClients();
+  final HttpService _connect;
+  AuthenticationRepository(this._connect);
+  
   @override
   Future<Result<String, String>> loginUser(String email, String password) async {
     Map<String, dynamic> body = {
@@ -17,7 +19,7 @@ class AuthenticationRepository implements AuthenticationRequest {
       "password": password,
     };
 
-    var response = await connect.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: body);
+    var response = await _connect.httpPost(endpoint: Endpoints.auth + Endpoints.login, body: body);
 
     return response.fold((success) {
       return Success(success["access_token"]);
@@ -26,7 +28,7 @@ class AuthenticationRepository implements AuthenticationRequest {
 
   @override
   Future<Result<User, String>> getProfile(String token) async {
-    var response = await connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", token: token);
+    var response = await _connect.httpGet(endpoint: "${Endpoints.auth}${Endpoints.profile}", );
 
     return response.fold((success) {
       var profile = User.fromMap(success);

@@ -28,17 +28,3 @@ AppBar AppbarDefault(BuildContext context, String text) {
     ],
   );
 }
-
-AppBar AppbarDefaultJustBackBtn(BuildContext context) {
-  return AppBar(
-    backgroundColor: Colors.transparent, // Set AppBar background color to transparent
-    elevation: 0, // Remove AppBar elevation
-    leading: IconButton(
-      onPressed: () => Navigator.pop(context),
-      icon: const Icon(
-        Icons.arrow_back,
-        color: Colors.black,
-      ),
-    ),
-  );
-}

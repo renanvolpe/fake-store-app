@@ -13,13 +13,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  
+  const LoginPage({super.key = const Key("LoginPage")});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
   late LoginBloc loginController;
   late GetUserBloc getUserController;
   @override
@@ -117,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                                 return ButtonBorderPrimary(
+                                    key: Key("Login button"),
                                     onTap: () => loginController
                                         .add(LoginStarted(emailController.text, passwordController.text)),
                                     text: "Sign in");
