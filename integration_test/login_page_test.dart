@@ -12,34 +12,38 @@ import 'package:fake_store_joao/presentation/screen/loading_page.dart';
 import 'package:fake_store_joao/presentation/screen/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:result_dart/result_dart.dart';
 
-import 'login_page_test.mocks.dart';
+import '../test/data/presentation/screen/login_page_test.mocks.dart';
 
 @GenerateMocks([AuthenticationRepository])
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
   late MockAuthenticationRepository mockRepository;
 
   setUpAll(() {
     mockRepository = MockAuthenticationRepository();
-      when(mockRepository.loginUser("joao@joao.com", "1234")).thenAnswer((_) async => Success(token));
+    when(mockRepository.loginUser("joao@joao.com", "1234")).thenAnswer((_) async => Success(token));
 
-      when(mockRepository.getProfile(token)).thenAnswer((_) async => Success(User(
-          name: Name("joao"),
-          email: Email("joao@joao.com"),
-          password: Password("1234"),
-          avatar: "",
-          role: "admin",
-          id: 1,
-          creationAt: "",
-          updatedAt: "")));
+    when(mockRepository.getProfile(token)).thenAnswer((_) async => Success(User(
+        name: Name("joao"),
+        email: Email("joao@joao.com"),
+        password: Password("1234"),
+        avatar: "",
+        role: "admin",
+        id: 1,
+        creationAt: "",
+        updatedAt: "")));
   });
+
+   const expected = [LoginInitial, LoginProgress, LoginSuccess];
 
   group("Test login page components and states", () {
     testWidgets('Verify that the add user button adds user to database', (WidgetTester tester) async {
-      
       // SetupBinds.setupAuthData();
 
       binds.registerSingleton<LoginBloc>(LoginBloc(mockRepository));
@@ -54,7 +58,7 @@ void main() {
         routerConfig: router,
       ));
 
-      // await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
       var loginPage = find.byType(LoginPage);
       expect(loginPage, findsOneWidget);
@@ -67,14 +71,22 @@ void main() {
       expect(btnSignIn2, findsOneWidget);
       await tester.tap(btnSignIn2);
 
+      var loginBloc = binds.get<LoginBloc>();
+
+      expect(loginBloc.stream, emitsInOrder(expected));
+
+      // expect(loginBloc.state, LoginSuccess(token));
+
       await tester.pump();
       // await tester.pumpAndSettle();
 
-      var loginPage2 = find.byType(LoginPage);
-      expect(loginPage2, findsOneWidget);
+      // var loginPage2 = find.byType(LoginPage);
+      // // var homePage = find.byType(HomePage);
 
-      var loadingPage = find.byType(LoadingPage);
-      expect(loadingPage, findsOneWidget);
+      // expect(loginPage2, findsOneWidget);
+
+      // var loadingPage = find.byType(LoadingPage);
+      // expect(loadingPage, findsOneWidget);
       // await tester.pump();
       // await tester.pumpAndSettle();
       // var homePage = find.byType(HomePage);

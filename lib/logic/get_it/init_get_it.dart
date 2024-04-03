@@ -26,7 +26,7 @@ class SetupBinds {
   static void setupBindsAuth() {
     //BINDS BEFORE HOME
 
-     binds.registerSingleton(HttpClientsTest(Client ()));
+      binds.registerSingleton(HttpClientsTest(Client()));
       binds.registerSingleton<AuthenticationRepository>(AuthenticationRepository(binds.get<HttpClientsTest>()));
       binds.registerSingleton<GetUserBloc>(GetUserBloc(binds.get<AuthenticationRepository>()));
       binds.registerSingleton<LoginBloc>(LoginBloc(binds.get<AuthenticationRepository>()));

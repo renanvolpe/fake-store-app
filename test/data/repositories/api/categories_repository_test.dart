@@ -15,8 +15,12 @@ void main() {
               "https://assets-global.website-files.com/5f2a93fe880654a977c51043/620fd215f344f16633f1aafc_hero_2.jpeg");
       var response = await apiCategorires.createCategory(categoryCreate);
       response.onSuccess((success) => categoryTest = success);
+
       expect(response, isA<Success>());
     });
+
+    //run products teste
+
     test("Get All categories", () async {
       var response = await apiCategorires.getAllCategories();
       expect(response, isA<Success>());

@@ -32,9 +32,9 @@ class NetWorkUtils {
   static Uri getUri(String endpoint)=> Uri.https(Endpoints.baseUrl, Endpoints.v1 + endpoint);
 
   static printLoggSuccess(Response response) => Logg.consoleShow(
-      "SUCCESS \nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \nBODY :: ${response.body}");
+      "SUCCESS \nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method} \nResponse :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \n");
   static printLoggError(Response response, String errorMessage) => Logg.error(
-      "\nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \nBODY :: ${response.body}  \nErrorMessage :: $errorMessage ");
+      "\nENDPOINT :: ${response.request?.url} \nVERB :: ${response.request?.method}  \nSTATUS CODE :: ${response.statusCode} => ${ResponseCode().getValue(response.statusCode)} \nErrorMessage :: $errorMessage \n");
 }
 
 class ResponseCode {

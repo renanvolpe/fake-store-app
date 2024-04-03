@@ -18,7 +18,6 @@ void main() {
 
       var response = await apiUser.createUser(userCrate);
 
-      response.onSuccess((success) => userTest = success);
 
       expect(response, isA<Success>());
     });
