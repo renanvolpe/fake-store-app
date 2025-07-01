@@ -30,7 +30,7 @@ Developed entirely in **Flutter** and **Dart**.
 
 #### Technologies & Libraries Used
 
--   **🎨 MVVM:** Model-View-ViewModel architectural pattern for clean code separation.
+-   **🎨 BLoC Pattern:** BLoC architectural pattern for clean separation.
 -   **🗺️ Go Router:** Declarative routing solution for Flutter.
 -   **🗄️ SQLite:** Local database for persistent data storage.
 -   **🧱 BLoC:** Business Logic Component for state management.
